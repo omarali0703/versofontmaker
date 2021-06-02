@@ -115,6 +115,9 @@ body {
     margin-right: 80px;
 }
 
+.click {
+    cursor: pointer;
+}
 
 .main-container {
     display: flex;
@@ -241,6 +244,13 @@ body {
     -webkit-animation-duration: 0.4s;
     animation-name: animatetop;
     animation-duration: 0.4s
+}
+
+.modal-inner {
+    padding:10px;
+    font-family: Lato-Thin;
+    font-size: 12pt;
+    border-bottom: 1px solid #0088ff;
 }
 
 .modal-top {

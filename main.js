@@ -12,8 +12,8 @@ window.addEventListener('load', function () {
     initialisePage();
 });
 const baseSettings = [
-    { type: 'select', id: 'blade_type', name: "Blade Type", options: [{ name: "pixel", description: 'NeoPixel' }, { name: "tricree", description: 'TriCree/Cree LED' }] },
-    { type: 'select', id: 'strip_type', name: "Strip Type", options: [{ name: 'ws2812', description: 'WS2812' }, { name: 'apa102', description: 'APA102' }] },
+    { type: 'select', id: 'blade_type', name: "Blade Type", description:'The lighting setup for your build. TriCree setups use a single tricree or singlecree LED in the hilt of the saber. NeoPixel builds use a strip of LEDS that are installed inside the blade tube.', options: [{ name: "pixel", description: 'NeoPixel' }, { name: "tricree", description: 'TriCree/Cree LED' }] },
+    { type: 'select', id: 'strip_type', name: "Strip Type", description:'The type of LED strip inside of the blade tube. Consult your LED strip documentation to find out what standard your LED strip uses.', options: [{ name: 'ws2812', description: 'WS2812' }, { name: 'apa102', description: 'APA102' }] },
     { type: 'input', id: 'pixel_count', name: "Blade Pixel Count", state: "HIDDEN" },
     { type: 'input', id: 'crossguard_pixel_count', name: "Cross Guard Pixel Count", state: "HIDDEN" },
     { type: 'input', id: 'crossguard_delay', name: "Cross Guard Delay", state: "HIDDEN" },
@@ -131,6 +131,18 @@ function createSetting(title, baseSettings, configType, insertNext, deletable) {
                 field.appendChild(optionElement);
             }
         }
+
+        let info = document.createElement('span');
+        let infoIcon = document.createElement('i');
+        infoIcon.classList = 'fas fa-info-circle icon-right click';
+        info.appendChild(infoIcon);
+
+        info.addEventListener('click', function() {
+            openModal('Information', 'info');
+            document.querySelector('.modal-inner').textContent = setting.description;
+        });
+
+        label.appendChild(info);
 
         inputGroup.appendChild(label);
         inputGroup.appendChild(field);
