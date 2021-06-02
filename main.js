@@ -12,19 +12,20 @@ window.addEventListener('load', function () {
     initialisePage();
 });
 const baseSettings = [
-    { type: 'select', id: 'bladetype', name: "Blade Type", options: [{ name: "pixel", description: 'NeoPixel' }, { name: "tricree", description: 'TriCree/Cree LED' }] },
-    { type: 'select', id: 'striptype', name: "Strip Type", options: [{ name: 'ws2812', description: 'WS2812' }, { name: 'apa102', description: 'APA102' }] },
-    { type: 'input', id: 'pixelcount', name: "Blade Pixel Count", state: "HIDDEN" },
-    { type: 'input', id: 'crossguardpixelcount', name: "Cross Guard Pixel Count", state: "HIDDEN" },
-    { type: 'input', id: 'crossguarddelay', name: "Cross Guard Delay", state: "HIDDEN" },
-    { type: 'input', id: 'standby', name: 'Stand By After' },
-    { type: 'input', id: 'muteafter', name: 'Mute Mode After' },
-    { type: 'input', id: 'retractionAfter', name: 'Retraction After' },
-    { type: 'input', id: 'doubleclicktime', name: 'Double-Click Time' },
-    { type: 'input', id: 'blasterafter', name: 'Blaster After' },
-
-
-    { type: 'multi-input-2', id: 'buttonBlink', name: 'Button Blink' },
+    { type: 'select', id: 'blade_type', name: "Blade Type", options: [{ name: "pixel", description: 'NeoPixel' }, { name: "tricree", description: 'TriCree/Cree LED' }] },
+    { type: 'select', id: 'strip_type', name: "Strip Type", options: [{ name: 'ws2812', description: 'WS2812' }, { name: 'apa102', description: 'APA102' }] },
+    { type: 'input', id: 'pixel_count', name: "Blade Pixel Count", state: "HIDDEN" },
+    { type: 'input', id: 'crossguard_pixel_count', name: "Cross Guard Pixel Count", state: "HIDDEN" },
+    { type: 'input', id: 'crossguard_delay', name: "Cross Guard Delay", state: "HIDDEN" },
+    { type: 'input', id: 'stand_by_after', name: 'Stand By After' },
+    { type: 'input', id: 'mute_mode_after', name: 'Mute Mode After' },
+    { type: 'input', id: 'retraction_after', name: 'Retraction After' },
+    { type: 'input', id: 'double_click_time', name: 'Double-Click Time' },
+    { type: 'input', id: 'blaster_after', name: 'Blaster After' },
+    { type: 'input', id: 'master_volume', name: 'Master Volume' },
+    { type: 'multi-input-2', id: 'button_blink', name: 'Button Blink' },
+    { type: 'input', id: 'button_count', name: 'Button Count' },
+    { type: 'input', id: 'clash_sensitivity', name: 'Clash Sensitivity' },
 ]
 
 const fontSettings = [
@@ -56,10 +57,20 @@ const colourSettings = [
     { type: 'colour', id: 'bladecolour', name: 'Blaster Colour' },
 ];
 
-function createSetting(title, baseSettings, configType) {
+function createSetting(title, baseSettings, configType, insertNext, deletable) {
     let baseSettingsContainer = document.createElement('div');
     baseSettingsContainer.classList = 'basesetting-container';
     baseSettingsContainer.setAttribute('config', configType);
+    if (deletable) {
+        let closeDelete = document.createElement('div');
+        let closeDeleteIcon = document.createElement('i');
+        closeDeleteIcon.classList = 'modal-close fas fa-times-circle';
+
+        closeDeleteIcon.addEventListener('click', function () {
+            baseSettingsContainer.remove();
+        })
+        baseSettingsContainer.appendChild(closeDeleteIcon);
+    }
     let containerTitle = document.createElement('div');
     containerTitle.classList = 'container-title';
     containerTitle.textContent = title;
@@ -102,6 +113,15 @@ function createSetting(title, baseSettings, configType) {
             let colourPicker = generateColourPicker(field);
         }
 
+        if (elementType == 'multi-input-2') {
+            let input1 = document.createElement('input');
+            let input2 = document.createElement('input');
+            field.appendChild(input1);
+            field.appendChild(input2);
+            inputGroup.style.borderBottom = 'unset';
+            field.classList.add('double-input');
+        }
+
 
         if (elementType == 'select') {
             for (let option of setting.options) {
@@ -117,29 +137,38 @@ function createSetting(title, baseSettings, configType) {
 
         baseSettingsContainer.appendChild(inputGroup);
     }
+    if (insertNext) {
+        let parent = document.querySelector('.main-container');
 
-    document.querySelector('.main-container').appendChild(baseSettingsContainer);
+        parent.insertBefore(baseSettingsContainer, insertNext);
+    } else {
+        document.querySelector('.main-container').appendChild(baseSettingsContainer);
+    }
 }
 
 function initialisePage() {
-    createSetting("Main Saber Settings", baseSettings, 'base');
+    createSetting("Main Saber Settings", baseSettings, 'base', false);
     createSetting("Font Settings", fontSettings, 'font');
     insertAdd('fonts');
-    createSetting("Effects Settings", effectSettings, 'effects');
+    createSetting("Effects Settings", effectSettings, 'effects', false);
     insertAdd('effects');
-    createSetting("Colour Settings", colourSettings, 'colour');
+    createSetting("Colour Settings", colourSettings, 'colour', false);
     insertAdd('colour');
 }
 
 function insertAdd(type) {
     let addElement = document.createElement('div');
-    addElement.classList = "add-element";
+    addElement.classList = "add-element icon-green";
     let addElementButton = document.createElement('div');
+    let addElementText = document.createElement('span');
+    addElementText.textContent = "Add New";
     let icon = document.createElement('i');
-    icon.classList = 'fas fa-plus-square icon-green';
+    icon.classList = 'fas fa-plus-square icon-right';
 
 
     addElement.appendChild(addElementButton);
+
+    addElementButton.appendChild(addElementText);
     addElementButton.appendChild(icon);
     document.querySelector('.main-container').appendChild(addElement);
     switch (type) {
@@ -147,25 +176,26 @@ function insertAdd(type) {
             tippy(addElementButton, {
                 content: "Add a new font configuration",
             });
-            // icon.addEventListener('click', function() {
-            //     openModal('Create a new font configuration', 'add-new-font');
-            // });
+            icon.addEventListener('click', function () {
+                createSetting('New Font', fontSettings, 'font', addElement, true);
+            });
             break;
         case 'effects':
             tippy(addElementButton, {
                 content: "Add a new effects configuration",
             });
-            // icon.addEventListener('click', function() {
-            //     openModal('Create a new font configuration', 'add-new-font');
-            // });
+
+            icon.addEventListener('click', function () {
+                createSetting('New Effect', effectSettings, 'effects', addElement, true);
+            });
             break;
         case 'colour':
             tippy(addElementButton, {
                 content: "Add a new colour configuration",
             });
-            // icon.addEventListener('click', function() {
-            //     openModal('Create a new font configuration', 'add-new-font');
-            // });
+            icon.addEventListener('click', function () {
+                createSetting('New Colour', colourSettings, 'colour', addElement, true);
+            });
             break;
     }
 }

@@ -18,6 +18,7 @@ function openModal(title, type) {
     modalTitle.textContent = title;
     switch (type) {
         case "export":
+            exportConfig();
             break;
     }
     

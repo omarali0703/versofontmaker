@@ -109,12 +109,12 @@ body {
     padding:40px;
     font-size:20pt;
     border: 4px dotted grey;
-    border-radius:10px;
+    border-radius:0px;
     box-shadow: unset;
     height:100%;
-
-
+    margin-right: 80px;
 }
+
 
 .main-container {
     display: flex;
@@ -147,6 +147,16 @@ body {
 .right {
     margin-left: auto;
 
+}
+
+.double-input {
+    display:flex;
+}
+
+.double-input > input {
+    border-bottom: 2px solid #0088ff;
+    margin-right: 2.5px;
+    margin-left: 2.5px;
 }
 
 .btn {
@@ -267,6 +277,7 @@ body {
    float:right;
    cursor:pointer;
    font-size: 18pt;
+   margin-left: 10px;
    color:red;
 }
 
@@ -307,6 +318,7 @@ body {
 }
 
 .icon-green {
+    font-family: Lato-Black;
     color: #00c41d;
 }
 
