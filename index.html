@@ -15,6 +15,7 @@
     <script src="https://unpkg.com/@popperjs/core@2"></script>
     <script src="https://unpkg.com/tippy.js@6"></script>
 
+    <script src="utils/editor-utils.js"></script>
     <script src="utils/modal-utils.js"></script>
     <script src="main.js"></script>
     <script src="utils/config-utils.js"></script>
@@ -31,6 +32,7 @@
         </div>
 
         <div class='btn-group right'>
+            <div class='btn btn-preview' id='preview'>Preview <span><i class='fas fa-eye'></i></span></spand></div>
             <div class='btn btn-import-font' id='new'>Create Font</div>
         </div>
 
@@ -64,6 +66,15 @@
             </div>-->
     </div>
 
+    <div class='toolbox'>
+        <div class='tools'>
+            <div class='tool create-font'><span><i class='fas fa-pencil-alt'></i></span></div>
+            <div class='tool create-effect'><span><i class='fas fa-bolt'></i></span></div>
+            <div class='tool create-colour'><span><i class='fas fa-fill-drip'></i></span></div>
+            <div class='tool create-profile'><span><i class='fas fa-sliders-h'></i></span></div>
+        </div>
+    </div>
+
     <div class='modal'>
         <div class='modal-content'>
             <div class='modal-top'>
@@ -74,7 +85,7 @@
                 </div>
             </div>
             <div class='modal-inner'>
-                
+
             </div>
             <div class='modal-bottom'>
                 <div class='modal-btn-group'>

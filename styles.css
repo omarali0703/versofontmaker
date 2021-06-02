@@ -48,7 +48,7 @@ body {
     right: 0px;
     align-items:center;
     box-shadow: 2px 2px 5px 0px #00000047;
-
+    z-index: 2;
 }
 
 .colour-container {
@@ -90,7 +90,7 @@ body {
 
 .basesetting-container, .add-element {
     min-width: 200px;
-    width: 400px;
+    width: 450px;
     padding: 40px;
     background-color: white;
     margin: auto;
@@ -296,7 +296,7 @@ body {
     background-color:#0088ff;
     color:white;
     font-family: Lato-Black;
-/*     float:right; */
+    float:right;
 /*     width:100%; */
 }
 
@@ -307,6 +307,19 @@ body {
 
 
 /* END MODAL */
+
+/* START TOOLBAR */
+.toolbox {/* position: fixed; */position: fixed;display: grid;background-color: white;width: 20%;height: 60px;top: 60px;right: 0px;right: 0px;align-items: center;border-radius: 0px 0px 20px 20px;box-shadow: 2px 2px 5px 0px #00000047;z-index: 1;}
+
+.tools {display: flex;padding: 10px;/* align-items: center; *//* text-align: center; */}
+
+.tool {
+    font-size: 20pt;
+    padding: 10px;
+    color: gainsboro;
+    margin: auto;
+}
+/* END TOOLBAR */
 
 /* Overrides */
 /* TOASTR */
