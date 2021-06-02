@@ -1,0 +1,89 @@
+<html>
+
+<head>
+    <link href="utils/fontawesome/css/all.min.css" rel="stylesheet">
+    <!--load all styles -->
+    <link rel="stylesheet" href="utils/toastr/toastr.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+   
+    <script src="utils/jquery-3.6.0.min.js"></script>
+    <script src="utils/toastr/toastr.min.js"></script>
+
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="https://unpkg.com/tippy.js@6"></script>
+
+    <script src="utils/modal-utils.js"></script>
+    <script src="main.js"></script>
+    <script src="utils/config-utils.js"></script>
+
+
+
+    <div class='banner-top'>
+
+        <div class='btn-group left'>
+            <div class='btn btn-new' id='new'>Create New Config</div>
+            <div class='btn btn-import' id='import'>Import Config</div>
+            <div class='btn btn-export' id='export'>Export Config</div>
+            <div class='btn btn-share' id='share'>Share Config</div>
+        </div>
+
+        <div class='btn-group right'>
+            <div class='btn btn-import-font' id='new'>Create Font</div>
+        </div>
+
+    </div>
+
+    <div class='main-container'>
+        <!--<div class='font font-container'>
+                <div class='font font-settings'>
+                    <select name="blade-type" id="blade-type">
+                        <option value="pixel">NeoPixel Blade</option>
+                        <option value="cree">Tri-Cree/Cree LED</option>
+                    </select>
+                    <select name="strip-type" id="strip-type" style='display:none;'>
+                        <option value="ws2812">WS2812</option>
+                        <option value="apa102">APA102</option>
+                    </select>
+
+                    <div class='font font-input-group pixel-count-input' style='display:none;'>
+                        <label for="pixel-count">LED Pixel Count</label>
+                        <input id='pixel-count' type="text">
+                    </div>
+                    
+                </div>
+
+                <div class='font font-main' id=1>
+
+                </div>
+                <div class='font font-main' id=2></div>
+                <div class='font font-main' id=3></div>
+                <div class='font font-main' id=4></div>
+            </div>-->
+    </div>
+
+    <div class='modal'>
+        <div class='modal-content'>
+            <div class='modal-top'>
+                <div class='modal-title'>Test Title</div>
+                <div class='modal-btn-group'>
+                    <i class='modal-close fas fa-times-circle' onclick="closeModal"></i>
+                    <!-- <div class='modal-close' onclick="closeModal">X</div> -->
+                </div>
+            </div>
+            <div class='modal-bottom'>
+                <div class='modal-btn-group'>
+                    <div class='modal-btn'>
+                        <div>Export<span><i class='fas fa-file-export icon-right'></i></span></div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>

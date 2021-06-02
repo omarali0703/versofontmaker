@@ -1,0 +1,313 @@
+
+@font-face {
+    font-family: Lato;
+    src: url(utils/fonts/Lato-Regular.ttf);
+}
+
+@font-face {
+    font-family: Lato-Black;
+    src: url(utils/fonts/Lato-Black.ttf);
+}
+
+@font-face {
+    font-family: Lato-Italic;
+    src: url(utils/fonts/Lato-Italic.ttf);
+}
+
+@font-face {
+    font-family: Lato-Thin;
+    src: url(utils/fonts/Lato-Thin.ttf);
+}
+
+body {
+    background-color: white;
+}
+
+.blend {
+    min-width: 25px;
+    min-height: 25px;
+    width: 20px;
+    height: 20px;
+    margin: auto;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px 0px #00000047;
+    margin-top:auto;
+    margin-bottom:auto;
+
+}
+
+.banner-top {
+    position: fixed;
+    display: flex;
+    background-color: white;
+    width: 100%;
+    height: 60px;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    align-items:center;
+    box-shadow: 2px 2px 5px 0px #00000047;
+
+}
+
+.colour-container {
+    display:flex;
+    margin-bottom: 20px;
+}
+
+.colour-controller {
+    display:grid;
+    margin-bottom: 0px;
+}
+
+.input-group { 
+    display: grid;
+    width: 100%;
+    margin-top: 10px;
+    font-family: Lato;
+    font-weight: lighter;
+    /* text-transform: uppercase; */
+    border-bottom: 2px solid #0088ff;
+    min-height: 50px;
+}
+
+.input-group > .label {
+    padding: 0px;
+    margin-left: 0px;
+}
+
+.input-group input {
+    border-style: hidden;
+    width: 100%;
+    height: 100%;
+}
+
+.input-group input:active {
+    border-style: hidden;
+
+}
+
+.basesetting-container, .add-element {
+    min-width: 200px;
+    width: 400px;
+    padding: 40px;
+    background-color: white;
+    margin: auto;
+    margin-top: 70px;
+    margin-left: 10px;
+    margin-right: 10px;
+    height:100%;
+    box-shadow: 2px 2px 20px 0px #0000001f;
+
+}
+
+.add-element {
+    min-width: fit-content;
+    width: fit-content;
+    margin-top:70px;
+    padding:40px;
+    font-size:20pt;
+    border: 4px dotted grey;
+    border-radius:10px;
+    box-shadow: unset;
+    height:100%;
+
+
+}
+
+.main-container {
+    display: flex;
+    height:1000px;
+}
+
+.container-title {
+    font-family: Lato-Black;
+    font-size: 16pt;
+    /* text-transform: uppercase; */
+    /* font-style: italic; */
+    margin-bottom: 30px;
+    border-bottom: 2px solid #0088ff;
+    text-align: right;
+}
+
+.banner-top {
+    display: flex;
+}
+
+.btn-group {
+    display: flex;
+}
+
+.left {
+    margin-right: auto;
+
+}
+
+.right {
+    margin-left: auto;
+
+}
+
+.btn {
+    margin-top: auto;
+    margin-bottom: auto;
+    padding: 10px;
+    margin-left: 10px;
+    color: gainsboro;
+    font-family: Lato-Black;
+    font-weight: lighter;
+    height: 20px;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.btn-new {
+    background-color: black;
+    color: white;
+}
+
+.btn-import {
+    color: white;
+    background-color: #00c41d;
+    
+}
+
+.btn-import-font {
+    background-color: black;
+    color: white;
+    
+}
+
+.btn-new-font {
+    background-color: black;
+    color: white;
+    
+}
+
+.btn-export {
+    color: white;
+    background-color: #00c41d;
+    
+}
+
+.btn-share {
+    background-color: #0088ff;
+    color: white;
+
+    
+}
+
+
+/* ---------------------------------------------------------------------------- */
+
+/* MODAL */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    font-family: Lato;
+  }
+
+.modal-content {
+    position: relative;
+    background-color: white;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    height:fit-content;
+
+    box-shadow: 2px 2px 5px 0px #00000047;
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s
+}
+
+.modal-top {
+    display:flex;
+}
+
+.modal-bottom {
+    margin-top:20px;
+    display:flow-root;
+    width:100%;
+}
+
+@keyframes animatetop {
+    from {top: -300px; opacity: 0}
+    to {top: 0; opacity: 1}
+}
+
+.modal-title {
+    font-family: Lato;
+    font-size: 16pt;
+    /* text-transform: uppercase; */
+    float:left;
+    width: 100%;
+}
+
+.modal-btn-group {
+    float:right;
+    margin-right:auto;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.modal-close {
+   float:right;
+   cursor:pointer;
+   font-size: 18pt;
+   color:red;
+}
+
+.modal-btn {
+    padding:10px;
+    background-color:#0088ff;
+    color:white;
+    font-family: Lato-Black;
+/*     float:right; */
+/*     width:100%; */
+}
+
+.modal-btn:hover, .modal-close:hover {
+    opacity:0.6;
+    cursor:pointer;
+}
+
+
+/* END MODAL */
+
+/* Overrides */
+/* TOASTR */
+.toast-title {
+    font-family: Arial, Helvetica, sans-serif !important;
+}
+
+.toast-message {
+    font-family: Arial, Helvetica, sans-serif !important;
+}
+
+/* END TOASTR */
+
+
+/* ICONS */
+
+.icon-right {
+    margin-left: 5px;
+}
+
+.icon-green {
+    color: #00c41d;
+}
+
+/* END ICONS */
