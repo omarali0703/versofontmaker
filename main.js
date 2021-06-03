@@ -52,9 +52,15 @@ function createSetting(title, baseSettings, configType, insertNext, deletable) {
         closeDeleteIcon.classList = 'modal-close fas fa-times-circle';
 
         closeDeleteIcon.addEventListener('click', function () {
-            baseSettingsContainer.remove();
+            openModal("Are you sure?", 'question', function() {
+                baseSettingsContainer.remove();
+                toastr.success('Successfully removed.');
+                
+            });
         })
         baseSettingsContainer.appendChild(closeDeleteIcon);
+        toastr.success('Successfully added.');
+
     }
     let containerTitle = document.createElement('div');
     containerTitle.classList = 'container-title';
