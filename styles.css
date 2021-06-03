@@ -24,16 +24,14 @@ body {
 }
 
 .blend {
-    min-width: 25px;
-    min-height: 25px;
-    width: 20px;
-    height: 20px;
+    min-width: 50px;
+    min-height: 50px;
+    /* width: 20px; */
+    /* height: 20px; */
     margin: auto;
-    border: 1px solid lightgrey;
-    border-radius: 5px;
-    box-shadow: 2px 2px 5px 0px #00000047;
-    margin-top:auto;
-    margin-bottom:auto;
+    /* border: 1px solid lightgrey; */
+    /* border-radius: 5px; */
+    box-shadow: rgb(0 0 0 / 28%) 2px 2px 5px 0px;
 
 }
 
