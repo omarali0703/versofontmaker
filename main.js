@@ -13,7 +13,9 @@ window.addEventListener('load', function () {
     var createNewFont = document.querySelector('.btn-import-font');
     var aboutPopup = document.querySelector('.btn-about');
 
-    importButton.onclick = function () { openModal('Import Config', 'import', ''); }
+    importButton.onclick = function () { openModal('Import Config', 'import', `<form action="/file-upload"
+    class="dropzone"
+    id="my-awesome-dropzone"></form>`); var dropzone = new Dropzone("#my-awesome-dropzone", { url: "/file/post"});}
     exportButton.onclick = function () { openModal('Export Config', 'export', ''); }
     shareButton.onclick = function () { openModal('Share Config', 'share', ''); }
     createNewConfig.onclick = function () { openModal('Create New Config', 'create', ''); }
@@ -40,9 +42,9 @@ window.addEventListener('load', function () {
     newFont.addEventListener('click', function () {
         createSetting('New Font', fontSettings, 'font', newestFontElements, true);
     });
-    newEffect.addEventListener('click', function () {
+    /* newEffect.addEventListener('click', function () {
         createSetting('New Effect', effectSettings, 'effects', newestEffectElements, true);
-    });
+    });*/
     newColour.addEventListener('click', function () {
         createSetting('New Colour', colourSettings, 'colour', newestColourElements, true);
     });
@@ -171,9 +173,9 @@ function createSetting(title, baseSettings, configType, insertNext, deletable) {
 
 function initialisePage() {
     createSetting("Main Saber Settings", baseSettings, 'base', false);
+    createSetting("Effects Settings", effectSettings, 'effects', false);
     createSetting("Font Settings", fontSettings, 'font');
     // insertAdd('fonts');
-    createSetting("Effects Settings", effectSettings, 'effects', false);
     // insertAdd('effects');
     createSetting("Colour Settings", colourSettings, 'colour', false);
     // insertAdd('colour');

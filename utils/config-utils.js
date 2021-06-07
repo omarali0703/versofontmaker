@@ -11,11 +11,13 @@ function exportConfig() {
             let isSelect = setting.querySelector('select') != null;
             if (isSelect) {
                 let select = setting.querySelector('select');
-                console.log(select, select.querySelector('select'));
+                // console.log(select, select.querySelector('select'));
                 value = setting.querySelector('select').value;
             } else {
                 let isMultiInput = setting.querySelectorAll('input').length > 1;
-                console.log(setting.querySelector('input'))
+                // console.log(setting.querySelector('input'))
+                let isColourInput = configType == 'colour';
+
                 if (isMultiInput) {
                     let multiInputs = setting.querySelectorAll('input');
                     let inputs = [];
@@ -24,12 +26,19 @@ function exportConfig() {
                     }
                     value = inputs.join(',');
                     if (value == ',') { value = ''; }
+                } else if (isColourInput) {
+                    key = `${key}${number}`;
+                    let colourElements = setting.querySelectorAll('[type="range"]');
+                    let colourArray = [];
+                    for (let colourElement of colourElements) {
+                        colourArray.push(colourElement.value);
+                    }
+                    value = colourArray.join(',');
                 } else {
                     value = setting.querySelector('input').value;
                 }
             }
             switch (configType) {
-
                 case "base":
                     outputObject.settings[key] = value;
                     break;
@@ -40,17 +49,27 @@ function exportConfig() {
                 /*case "effects":
                     outputObject['effect'][key] = value;
                     break;
-                case "colour":
-                    outputObject.settings[key] = value;
-                    break;
                 case "profile":
                     outputObject.settings[key] = value;
-                    break;*/
+                    break;
+                    */
+                case "colour":
+                    console.log(key)
+                    if (!(`colour${number}` in outputObject)) { outputObject[`colour${number}`] = []; }
+                    let colourObject = {};
+                    colourObject[key] = value;
+                    outputObject[`colour${number}`].push(colourObject);
+                    break;
+
             }
         }
-
-
     }
-
     console.log(outputObject);
+    convertToINIAndServe(outputObject);
+}
+
+function convertToINIAndServe(ini) {
+    for (let setting in ini) {
+        
+    }
 }
