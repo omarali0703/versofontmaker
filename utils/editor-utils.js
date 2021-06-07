@@ -16,32 +16,32 @@ const baseSettings = [
 ]
 
 const fontSettings = [
-    { type: 'text-input', id: 'fontName', name: 'Font Name' },
-    { type: 'select', id: 'fontType', name: 'Font Type', options: [{ name: "smooth", description: 'Smoothswing' }, { name: "mono", description: 'Monophonic' }, { name: "poly", description: 'Polyphonic' }] },
-    { type: 'text-input', id: 'sampFreq', name: 'Sampling Frequency' },
-    { type: 'text-input', id: 'ssTresh', name: 'SmoothSwing Threshold' },
-    { type: 'text-input', id: 'ssSens', name: 'SmoothSwing Sensitivity' },
-    { type: 'text-input', id: 'ssShar', name: 'SmoothSwing Sharpness' },
-    { type: 'text-input', id: 'ssHum', name: 'SmoothSwing Humducking' },
-    { type: 'text-input', id: 'ssMax', name: 'SmoothSwing Max Volume' },
-    { type: 'text-input', id: 'ssTrans1', name: 'SmoothSwing Transition 1' },
-    { type: 'text-input', id: 'ssTrans2', name: 'SmoothSwing Transition 2' },
-    { type: 'text-input', id: 'aHigh', name: 'AccentSwing High Threshold' },
-    { type: 'text-input', id: 'aLow', name: 'AccentSwing Low Threshold' },
-    { type: 'text-input', id: 'humgain', name: 'Hum Gain' }
+    { type: 'text-input', id: 'font_name', name: 'Font Name' },
+    { type: 'select', id: 'font_type', name: 'Font Type', options: [{ name: "smoothswing", description: 'Smoothswing' }, { name: "monophonic", description: 'Monophonic' }, { name: "polyphonic", description: 'Polyphonic' }] },
+    { type: 'text-input', id: 'sampling_frequency', name: 'Sampling Frequency' },
+    { type: 'text-input', id: 'smoothswing_threshold', name: 'SmoothSwing Threshold' },
+    { type: 'text-input', id: 'smoothswing_sensitivity', name: 'SmoothSwing Sensitivity' },
+    { type: 'text-input', id: 'smoothswing_sharpness', name: 'SmoothSwing Sharpness' },
+    { type: 'text-input', id: 'smoothswing_hum_ducking', name: 'SmoothSwing Humducking' },
+    { type: 'text-input', id: 'smoothswing_max_volume', name: 'SmoothSwing Max Volume' },
+    { type: 'text-input', id: 'smoothswing_transition1', name: 'SmoothSwing Transition 1' },
+    { type: 'text-input', id: 'smoothswing_transition2', name: 'SmoothSwing Transition 2' },
+    { type: 'text-input', id: 'accentswing_high_threshold', name: 'AccentSwing High Threshold' },
+    { type: 'text-input', id: 'accentswing_low_threshold', name: 'AccentSwing Low Threshold' },
+    { type: 'text-input', id: 'hum_gain', name: 'Hum Gain' }
 ];
 
 const effectSettings = [
-    { type: 'text-input', id: 'ignitiontime', name: 'Ignition Time' },
-    { type: 'text-input', id: 'retrationtime', name: 'Retration Time' },
-    { type: 'text-input', id: 'transitiontime', name: 'Transition Time' }
+    { type: 'text-input', id: 'ignition_time', name: 'Ignition Time' },
+    { type: 'text-input', id: 'retraction_time', name: 'Retration Time' },
+    { type: 'text-input', id: 'transition_time', name: 'Transition Time' }
 ];
 
 const colourSettings = [
-    { type: 'colour', id: 'bladecolour', name: 'Blade Colour' },
-    { type: 'colour', id: 'bladecolour', name: 'Clash Colour' },
-    { type: 'colour', id: 'bladecolour', name: 'Lockup Colour' },
-    { type: 'colour', id: 'bladecolour', name: 'Blaster Colour' },
+    { type: 'colour', id: 'blade_color', name: 'Blade Colour' },
+    { type: 'colour', id: 'clash_color', name: 'Clash Colour' },
+    { type: 'colour', id: 'lockup_color', name: 'Lockup Colour' },
+    { type: 'colour', id: 'blaster_color', name: 'Blaster Colour' },
 ];
 
 const profileSettings = [

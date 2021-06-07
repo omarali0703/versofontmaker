@@ -11,7 +11,7 @@ window.addEventListener('load', function () {
 
 
 
-function openModal(title, type, questionYesEvent) {
+function openModal(title, type, body = '', questionYesEvent) {
     var modalDescription = document.querySelector('.modal-inner');
     var modalBottom = document.querySelector('.modal-bottom');
     var bottomButtons = modalBottom.querySelector('div.modal-btn-group');
@@ -19,12 +19,15 @@ function openModal(title, type, questionYesEvent) {
     modalDescription.innerHTML = "";
     var modalTitle = document.querySelector('.modal-title')
     var modal = document.querySelector('.modal');
-   if (type == 'question'){
-        let yesButton = createModalButton(bottomButtons, 'Yes', 'fas fa-check-circle', function() {
+    if (body) {
+        modalDescription.innerHTML = body;
+    }
+    if (type == 'question') {
+        let yesButton = createModalButton(bottomButtons, 'Yes', 'fas fa-check-circle', function () {
             questionYesEvent();
             modal.style.display = 'none';
         });
-        let noButton = createModalButton(bottomButtons, 'No', 'fas fa-times-circle', function() {
+        let noButton = createModalButton(bottomButtons, 'No', 'fas fa-times-circle', function () {
             modal.style.display = 'none';
         });
     }
