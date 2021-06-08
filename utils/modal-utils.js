@@ -32,11 +32,10 @@ function openModal(title, type, body = '', questionYesEvent) {
         });
     }
     modalTitle.textContent = title;
-    switch (type) {
-        case "export":
-            exportConfig();
-            break;
-    }
+    // switch (type) {
+    //     case "export":
+    //         break;
+    // }
 
     modal.style.display = 'block';
 }

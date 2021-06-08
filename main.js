@@ -13,13 +13,19 @@ window.addEventListener('load', function () {
     var createNewFont = document.querySelector('.btn-import-font');
     var aboutPopup = document.querySelector('.btn-about');
 
-    importButton.onclick = function () { openModal('Import Config', 'import', `<form action="/file-upload"
+    importButton.onclick = function () {
+        openModal('Import Config', 'import', `<form action="/file-upload"
     class="dropzone"
-    id="my-awesome-dropzone"></form>`); var dropzone = new Dropzone("#my-awesome-dropzone", { url: "/file/post"});}
-    exportButton.onclick = function () { openModal('Export Config', 'export', ''); }
+    id="my-awesome-dropzone"></form>`); var dropzone = new Dropzone("#my-awesome-dropzone", { url: "/file/post" });
+    }
+    exportButton.onclick = function () { /*openModal('Export Config', 'export', '');*/ exportConfig(); }
     shareButton.onclick = function () { openModal('Share Config', 'share', ''); }
-    createNewConfig.onclick = function () { openModal('Create New Config', 'create', ''); }
-    createNewFont.onclick = function () { openModal('Create A New Font', 'create-font', ''); }
+    createNewConfig.onclick = function () {
+        openModal('Create New Config', 'question', 'Are you sure you want to start a new config file?', function () {
+            initialisePage();
+        });
+    }
+    createNewFont.onclick = function () { openModal('Create A New Font', 'create-font', 'This feature has not yet been implemented.'); }
     aboutPopup.onclick = function () { openModal('About', 'about', about); }
 
     // Toolbox
@@ -80,6 +86,7 @@ function createSetting(title, baseSettings, configType, insertNext, deletable) {
     baseSettingsContainer.appendChild(containerTitle);
     for (let setting of baseSettings) {
         let elementType = setting.type;
+        let defaults = setting.default;
         let typeToUse = '';
         switch (elementType) {
             case 'input':
@@ -121,13 +128,20 @@ function createSetting(title, baseSettings, configType, insertNext, deletable) {
             if (configType == 'profile') { baseSettingsContainer.setAttribute('id', currentProfileCount + 1); }
         }
 
+        if (elementType == 'input' || elementType == 'text-input') { field.value = defaults; }
+
         if (elementType == 'colour') {
             let colourPicker = generateColourPicker(field);
         }
 
         if (elementType == 'multi-input-2') {
+
             let input1 = document.createElement('input');
             let input2 = document.createElement('input');
+            if (defaults) {
+                input1.value = defaults[0];
+                input2.value = defaults[1];
+            }
             field.appendChild(input1);
             field.appendChild(input2);
             inputGroup.style.borderBottom = 'unset';
@@ -172,6 +186,8 @@ function createSetting(title, baseSettings, configType, insertNext, deletable) {
 }
 
 function initialisePage() {
+    document.querySelector('.main-container').innerHTML = '';
+
     createSetting("Main Saber Settings", baseSettings, 'base', false);
     createSetting("Effects Settings", effectSettings, 'effects', false);
     createSetting("Font Settings", fontSettings, 'font');
