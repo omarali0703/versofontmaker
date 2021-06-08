@@ -1,4 +1,3 @@
-
 @font-face {
     font-family: Lato;
     src: url(utils/fonts/Lato-Regular.ttf);
@@ -55,22 +54,22 @@ footer {
     top: 0px;
     left: 0px;
     right: 0px;
-    align-items:center;
+    align-items: center;
     box-shadow: 2px 2px 5px 0px #00000047;
     z-index: 2;
 }
 
 .colour-container {
-    display:flex;
+    display: flex;
     margin-bottom: 20px;
 }
 
 .colour-controller {
-    display:grid;
+    display: grid;
     margin-bottom: 0px;
 }
 
-.input-group { 
+.input-group {
     display: grid;
     width: 100%;
     margin-top: 10px;
@@ -81,7 +80,7 @@ footer {
     min-height: 50px;
 }
 
-.input-group > .label {
+.input-group>.label {
     padding: 0px;
     margin-left: 0px;
 }
@@ -97,7 +96,8 @@ footer {
 
 }
 
-.basesetting-container, .add-element {
+.basesetting-container,
+.add-element {
     min-width: 200px;
     width: 450px;
     padding: 40px;
@@ -106,7 +106,7 @@ footer {
     margin-top: 70px;
     margin-left: 10px;
     margin-right: 10px;
-    height:100%;
+    height: 100%;
     box-shadow: 2px 2px 20px 0px #0000001f;
 
 }
@@ -114,13 +114,13 @@ footer {
 .add-element {
     min-width: fit-content;
     width: fit-content;
-    margin-top:70px;
-    padding:40px;
-    font-size:20pt;
+    margin-top: 70px;
+    padding: 40px;
+    font-size: 20pt;
     border: 4px dotted grey;
-    border-radius:0px;
+    border-radius: 0px;
     box-shadow: unset;
-    height:100%;
+    height: 100%;
     margin-right: 80px;
 }
 
@@ -130,7 +130,7 @@ footer {
 
 .main-container {
     display: flex;
-    height:1000px;
+    height: 1000px;
 }
 
 .container-title {
@@ -162,16 +162,17 @@ footer {
 }
 
 .double-input {
-    display:flex;
+    display: flex;
 }
 
-.double-input > input {
+.double-input>input {
     border-bottom: 2px solid #0088ff;
     margin-right: 2.5px;
     margin-left: 2.5px;
 }
 
 .btn {
+    align-items: center;
     margin-top: auto;
     margin-bottom: auto;
     padding: 10px;
@@ -179,12 +180,15 @@ footer {
     color: gainsboro;
     font-family: Lato-Black;
     font-weight: lighter;
+    font-size: 10pt;
     height: 20px;
     text-transform: uppercase;
     cursor: pointer;
+    display:flex;
 }
 
-.btn-new, .btn-about {
+.btn-new,
+.btn-about {
     background-color: black;
     color: white;
 }
@@ -192,32 +196,32 @@ footer {
 .btn-import {
     color: white;
     background-color: #00c41d;
-    
+
 }
 
 .btn-import-font {
     background-color: black;
     color: white;
-    
+
 }
 
 .btn-new-font {
     background-color: black;
     color: white;
-    
+
 }
 
 .btn-export {
     color: white;
     background-color: #00c41d;
-    
+
 }
 
 .btn-share {
     background-color: #0088ff;
     color: white;
 
-    
+
 }
 
 
@@ -225,19 +229,28 @@ footer {
 
 /* MODAL */
 .modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    padding-top: 100px;
+    /* Location of the box */
     left: 0;
     top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
     font-family: Lato;
-  }
+}
 
 .modal-content {
     position: relative;
@@ -246,7 +259,7 @@ footer {
     padding: 20px;
     border: 1px solid #888;
     width: 80%;
-    height:fit-content;
+    height: fit-content;
 
     box-shadow: 2px 2px 5px 0px #00000047;
     -webkit-animation-name: animatetop;
@@ -256,7 +269,7 @@ footer {
 }
 
 .modal-inner {
-    padding:10px;
+    padding: 10px;
     font-family: Lato-Thin;
     font-size: 12pt;
     border-bottom: 1px solid #0088ff;
@@ -264,59 +277,67 @@ footer {
 }
 
 .modal-top {
-    display:flex;
+    display: flex;
 }
 
 .modal-bottom {
-    margin-top:20px;
-    display:flow-root;
-    width:100%;
+    margin-top: 20px;
+    display: flow-root;
+    width: 100%;
 }
 
 @keyframes animatetop {
-    from {top: -300px; opacity: 0}
-    to {top: 0; opacity: 1}
+    from {
+        top: -300px;
+        opacity: 0
+    }
+
+    to {
+        top: 0;
+        opacity: 1
+    }
 }
 
 .modal-title {
     font-family: Lato;
     font-size: 16pt;
     /* text-transform: uppercase; */
-    float:left;
+    float: left;
     width: 100%;
 }
 
 .modal-btn-group {
-    float:right;
-    margin-right:auto;
+    float: right;
+    margin-right: auto;
     margin-top: auto;
     margin-bottom: auto;
 }
 
 .modal-close {
-   float:right;
-   cursor:pointer;
-   font-size: 18pt;
-   margin-left: 10px;
-   color:red;
-   opacity: 0.7;
-   transition:opacity 0.2s;
+    float: right;
+    cursor: pointer;
+    font-size: 18pt;
+    margin-left: 10px;
+    color: red;
+    opacity: 0.7;
+    transition: opacity 0.2s;
 }
 
 .modal-btn {
-    padding:10px;
-    background-color:#0088ff;
-    color:white;
+    padding: 10px;
+    background-color: #0088ff;
+    color: white;
     font-family: Lato-Black;
-    float:right;
-    margin-right:10px;
-/*     width:100%; */
+    float: right;
+    margin-right: 10px;
+    /*     width:100%; */
 }
 
-.modal-btn:hover, .modal-close:hover {
-    opacity:1;
-    cursor:pointer;
-    transition:opacity 0.2s;
+.modal-btn:hover,
+.modal-close:hover {
+    opacity: 1;
+    cursor: pointer;
+    transition: opacity 0.2s;
 
 }
 
@@ -324,29 +345,79 @@ footer {
 /* END MODAL */
 
 /* START TOOLBAR */
-.toolbox {/* position: fixed; */position: fixed;display: grid;background-color: white;width: 20%;height: 60px;top: 60px;right: 0px;right: 0px;align-items: center;border-radius: 0px 0px 20px 20px;box-shadow: 2px 2px 5px 0px #00000047;z-index: 1;opacity: 0.5; transition:opacity 0.4s;}
+.toolbox {
+    opacity: 0.5;
+    position: fixed;
+    top: 0px;
+    transition: opacity 0.4s, top 0.4s;
+    width: 100%;
+    
+}
 
 .toolbox:hover {
-    opacity:100%;
-    transition:opacity 0.4s;
+    opacity: 100%;
+    top: 60px;
+    transition: opacity 0.4s, top 0.4s;
 }
 
 
-.tools {display: flex;padding: 10px;/* align-items: center; *//* text-align: center; */}
+.tools {
+    display: grid;
+    padding: 10px;
+    /* align-items: center; */
+    /* text-align: center; */
+    width: 20%;
+    background-color: white;
+
+    height: 60px;
+    align-items: center;
+    border-radius: 0px 0px 20px 20px;
+    box-shadow: 2px 2px 5px 0px #00000047;
+    z-index: 1;
+    margin-left: auto;
+    margin-right: auto;
+
+    /* left: 50%; */
+    /* right: 50%; */
+
+
+}
+
+.create-font {
+    grid-column-start: 1;
+}
+
+.create-colour {
+    grid-column-start: 2;
+}
+
+.create-profile {
+    grid-column-start: 3;
+}
 
 .tool {
     font-size: 20pt;
     padding: 10px;
-    color:#0088ff;
+    color: #0088ff;
     opacity: 0.7;
     margin: auto;
-    transition:opacity 0.2s;
+    transition: opacity 0.2s;
 }
 
 .tool:hover {
     opacity: 1;
-    transition:opacity 0.2s;
+    transition: opacity 0.2s;
 }
+
+.interactor {
+    width: 100%;
+    text-align: center;
+    color: gainsboro;
+    font-size: 24pt;
+    grid-column-start: 1;
+    grid-column-end: 4;
+}
+
 /* END TOOLBAR */
 
 /* Overrides */
@@ -358,10 +429,12 @@ footer {
 .toast-message {
     font-family: Arial, Helvetica, sans-serif !important;
 }
+
 .toast-success {
     background-color: #00c41d;
     font-family: Lato;
 }
+
 /* END TOASTR */
 
 
@@ -370,6 +443,11 @@ footer {
 .icon-right {
     margin-left: 5px;
 }
+
+.icon-left {
+    margin-right: 5px;
+}
+
 
 .icon-green {
     font-family: Lato-Black;
@@ -380,12 +458,12 @@ footer {
     /* font-family: Lato-Black; */
     color: #0088ff;
     opacity: 0.2;
-    transition:opacity 0.2s;
+    transition: opacity 0.2s;
 }
 
 .icon-blue:hover {
     opacity: 1;
-    transition:opacity 0.2s;
+    transition: opacity 0.2s;
 
 }
 

@@ -69,7 +69,20 @@ function exportConfig() {
 }
 
 function convertToINIAndServe(ini) {
+    let fileText = '';
     for (let setting in ini) {
         
+        if (setting == 'settings') {
+            fileText += '[settings] \n';
+
+            for (let settingElement in ini[setting]) {
+                let key = settingElement, value = ini[setting][settingElement];
+                fileText += `${key} = ${value} \n`;
+                console.log(key, value);
+            }
+        }
+        let fileSegment = ini[setting];
     }
+
+    console.log(fileText);
 }

@@ -12,7 +12,7 @@
 </head>
 
 <body>
-   
+
     <script src="utils/jquery-3.6.0.min.js"></script>
     <script src="utils/toastr/toastr.min.js"></script>
 
@@ -30,16 +30,16 @@
     <div class='banner-top'>
 
         <div class='btn-group left'>
-            <div class='btn btn-about' id='about'>About</div>
-            <div class='btn btn-new' id='new'>Create New Config</div>
-            <div class='btn btn-import' id='import'>Import Config</div>
-            <div class='btn btn-export' id='export'>Export Config</div>
-            <div class='btn btn-share' id='share'>Share Config</div>
+            <div class='btn btn-about' id='about'> <i class='fas fa-info icon-left'></i> About</div>
+            <div class='btn btn-new' id='new'><i class='fas fa-plus-circle icon-left'></i>Create New Config</div>
+            <div class='btn btn-import' id='import'><i class='fas fa-file-import icon-left'></i>Import Config</div>
+            <div class='btn btn-export' id='export'><i class='fas fa-file-export icon-left'></i>Export Config</div>
+            <div class='btn btn-share' id='share'><i class='fas fa-share-alt-square icon-left'></i>Share Config</div>
         </div>
 
         <div class='btn-group right'>
-            <div class='btn draw-border btn-preview' id='preview'>Preview <i class='fas fa-eye'></i></div>
-            <div class='btn btn-import-font' id='new'>Create Font</div>
+            <div class='btn draw-border btn-preview' id='preview'><i class='fas fa-eye icon-left'></i> Preview</div>
+            <div class='btn btn-import-font' id='new'><i class='fas fa-plus-circle icon-left'></i>Create Font</div>
         </div>
 
     </div>
@@ -78,10 +78,12 @@
             <!-- <div class='tool create-effect'><span><i class='fas fa-bolt'></i></span></div> -->
             <div class='tool create-colour'><span><i class='fas fa-fill-drip'></i></span></div>
             <div class='tool create-profile'><span><i class='fas fa-sliders-h'></i></span></div>
+            <div class='interactor'><i class='fas fa-ellipsis-h'></i></div>
         </div>
     </div>
 
     <div class='modal'>
+        <a href=`data:application/my-file;charset=utf-16le;base64,${btoa('test')}`>text file</a>
         <div class='modal-content'>
             <div class='modal-top'>
                 <div class='modal-title'>Test Title</div>
