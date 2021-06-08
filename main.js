@@ -174,6 +174,13 @@ function createSetting(title, baseSettings, configType, insertNext, deletable) {
         inputGroup.appendChild(label);
         inputGroup.appendChild(field);
 
+        // Add extra mini-editors for effects (and other sections too)
+        switch (configType) {
+            case 'effects':
+                generatePresetMaker(baseSettingsContainer);
+                break;
+        }
+
         baseSettingsContainer.appendChild(inputGroup);
     }
     if (insertNext) {

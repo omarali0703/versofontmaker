@@ -137,6 +137,43 @@ function generateColourPicker(parent) {
     parent.appendChild(colourContainer);
 }
 
+function generatePresetMaker(parent) {
+    let newPresetButton = document.createElement('div');
+    let newPresetIcon = document.createElement('i');
+    newPresetIcon.classList = 'fas fa-cross-circle icon-right';
+    newPresetButton.textContent = 'Create New Preset';
+    newPresetButton.appendChild(newPresetIcon);
+
+    newPresetButton.addEventListener('click', function() {
+        generatePresetContainer(parent);
+    });
+}
+
+function generatePresetContainer(parent) {
+    let presetContainer = document.createElement('div');
+    presetContainer.classList = 'preset-container';
+
+    let presetContainerTitle = document.createElement('span');
+    presetContainerTitle.textContent = 'New Preset';
+    let presetTop = document.createElement('div');
+    presetTop.classList = 'preset-top';
+    let presetDelete = document.createElement('div');
+    presetDelete.classList = 'preset-delete';
+    let deleteIcon = document.createElement('i');
+    deleteIcon.classList = 'fas fa-times-circle modal-close';
+    presetDelete.appendChild(deleteIcon);
+
+    presetDelete.addEventListener('click', function() {
+        presetContainer.remove(); 
+    });
+
+    // let presetInputs = 
+
+    presetTop.appendChild(presetContainerTitle);
+    presetTop.appendChild(presetDelete);
+    presetContainer.appendChild(presetTop);
+}
+
 
 function insertAfter(newNode, referenceNode) {
     referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
