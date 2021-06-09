@@ -5,6 +5,8 @@ Happy Sabesmithing!
 <br>
 Omar Ali, 2021`;
 
+var colours = [], fonts = [], profiles = [];
+
 window.addEventListener('load', function () {
     var importButton = document.querySelector('.btn-import');
     var exportButton = document.querySelector('.btn-export');
@@ -36,50 +38,88 @@ window.addEventListener('load', function () {
 
     initialisePage();
 
-    let newestFontElements = document.querySelectorAll('.basesetting-container[config="font"]');
-    console.log(newestFontElements);
-    newestFontElements = newestFontElements[newestFontElements.length - 1];
-    let newestEffectElements = document.querySelectorAll('.basesetting-container[config="effects"]');
-    newestEffectElements = newestEffectElements[newestEffectElements.length - 1];
-    let newestColourElements = document.querySelectorAll('.basesetting-container[config="colour"]');
-    newestColourElements = newestColourElements[newestColourElements.length - 1];
-    let newestProfileElements = document.querySelectorAll('.basesetting-container[config="profile"]');
-    newestProfileElements = newestProfileElements[newestProfileElements.length - 1];
     newFont.addEventListener('click', function () {
-        createSetting('New Font', fontSettings, 'font', newestFontElements, true);
+        let newestFontElements = document.querySelectorAll('.basesetting-container[config="font"]');
+        console.log(newestFontElements);
+        newestFontElements = newestFontElements[newestFontElements.length - 1];
+        createSetting(`New Font`, fontSettings, 'font', newestFontElements, true);
     });
     /* newEffect.addEventListener('click', function () {
-        createSetting('New Effect', effectSettings, 'effects', newestEffectElements, true);
+        let newestEffectElements = document.querySelectorAll('.basesetting-container[config="effects"]');
+    newestEffectElements = newestEffectElements[newestEffectElements.length-1];
+    createSetting('New Effect', effectSettings, 'effects', newestEffectElements, true);
     });*/
     newColour.addEventListener('click', function () {
-        createSetting('New Colour', colourSettings, 'colour', newestColourElements, true);
+        let newestColourElements = document.querySelectorAll('.basesetting-container[config="colour"]');
+        newestColourElements = newestColourElements[newestColourElements.length - 1];
+        createSetting(`New Colour`, colourSettings, 'colour', newestColourElements, true);
     });
     newProfile.addEventListener('click', function () {
-        createSetting('New Profile', profileSettings, 'profile', newestProfileElements, true);
+        let newestProfileElements = document.querySelectorAll('.basesetting-container[config="profile"]');
+        newestProfileElements = newestProfileElements[newestProfileElements.length - 1];
+        createSetting(`New Profile`, profileSettings, 'profile', newestProfileElements, true);
     });
 });
 
 
 function createSetting(title, baseSettings, configType, insertNext, deletable) {
+
     let baseSettingsContainer = document.createElement('div');
     baseSettingsContainer.classList = 'basesetting-container';
     baseSettingsContainer.setAttribute('config', configType);
+    baseSettingsContainer.setAttribute('id', 1);
+
     if (deletable) {
-        let closeDelete = document.createElement('div');
+        toastr.success('Successfully added.');
+
+        let currentFontCount = document.querySelectorAll('.basesetting-container[config="font"]').length;
+        let currentColourCount = document.querySelectorAll('.basesetting-container[config="colour"]').length;
+        let currentEffectCount = document.querySelectorAll('.basesetting-container[config="effects"]').length;
+        let currentProfileCount = document.querySelectorAll('.basesetting-container[config="profile"]').length;
+
+        if (configType == 'font') { baseSettingsContainer.setAttribute('id', currentFontCount + 1); }
+        if (configType == 'colour') { baseSettingsContainer.setAttribute('id', currentColourCount + 1); }
+        if (configType == 'effects') { baseSettingsContainer.setAttribute('id', currentEffectCount + 1); }
+        if (configType == 'profile') { baseSettingsContainer.setAttribute('id', currentProfileCount + 1); }
+
         let closeDeleteIcon = document.createElement('i');
         closeDeleteIcon.classList = 'modal-close fas fa-times-circle';
-
+        let id = baseSettingsContainer.getAttribute('id');
+        console.log(id);
         closeDeleteIcon.addEventListener('click', function () {
             openModal("Are you sure?", 'question', 'This process cannot be undone.', function () {
+
                 baseSettingsContainer.remove();
-                toastr.success('Successfully removed.');
+                console.log(id, 'DELETING');
+
+                switch (configType) {
+                    case 'font':
+                        fonts = removeElement(id, fonts);
+                        break;
+                    case 'profile':
+                        profiles = removeElement(id, profiles);
+                        break;
+                    case 'colour':
+                        colours = removeElement(id, colours);
+                        break;
+                }
+                updatePresetDropdowns(configType);
+                toastr.success(`Successfully removed ${configType} ${id}.`);
 
             });
         })
         baseSettingsContainer.appendChild(closeDeleteIcon);
-        toastr.success('Successfully added.');
+
 
     }
+
+    let count = baseSettingsContainer.getAttribute('id');
+    console.log(count);
+    if (configType != 'base' && configType != 'effects') {
+        title += ` (${count})`;
+    }
+
+
     let containerTitle = document.createElement('div');
     containerTitle.classList = 'container-title';
     containerTitle.textContent = title;
@@ -114,19 +154,8 @@ function createSetting(title, baseSettings, configType, insertNext, deletable) {
         label.innerHTML = setting.name;
 
         let field = document.createElement(typeToUse);
-        baseSettingsContainer.setAttribute('id', 1);
 
-        if (deletable) {
-            let currentFontCount = document.querySelectorAll('.basesetting-container[config="font"]').length;
-            let currentColourCount = document.querySelectorAll('.basesetting-container[config="colour"]').length;
-            let currentEffectCount = document.querySelectorAll('.basesetting-container[config="effects"]').length;
-            let currentProfileCount = document.querySelectorAll('.basesetting-container[config="profile"]').length;
 
-            if (configType == 'font') { baseSettingsContainer.setAttribute('id', currentFontCount + 1); }
-            if (configType == 'colour') { baseSettingsContainer.setAttribute('id', currentColourCount + 1); }
-            if (configType == 'effects') { baseSettingsContainer.setAttribute('id', currentEffectCount + 1); }
-            if (configType == 'profile') { baseSettingsContainer.setAttribute('id', currentProfileCount + 1); }
-        }
 
         if (elementType == 'input' || elementType == 'text-input') { field.value = defaults; }
 
@@ -173,16 +202,28 @@ function createSetting(title, baseSettings, configType, insertNext, deletable) {
 
         inputGroup.appendChild(label);
         inputGroup.appendChild(field);
-
+        console.log(configType);
         // Add extra mini-editors for effects (and other sections too)
-        switch (configType) {
-            case 'effects':
-                generatePresetMaker(baseSettingsContainer);
-                break;
-        }
+
 
         baseSettingsContainer.appendChild(inputGroup);
     }
+    switch (configType) {
+        case 'effects':
+            console.log('teststs')
+            generatePresetMaker(baseSettingsContainer);
+            break;
+        case 'colour':
+            colours.push(count);
+            break;
+        case 'profile':
+            profiles.push(count);
+            break;
+        case 'font':
+            fonts.push(count);
+            break;
+    }
+
     if (insertNext) {
         let parent = document.querySelector('.main-container');
 
@@ -197,12 +238,12 @@ function initialisePage() {
 
     createSetting("Main Saber Settings", baseSettings, 'base', false);
     createSetting("Effects Settings", effectSettings, 'effects', false);
-    createSetting("Font Settings", fontSettings, 'font');
+    createSetting("Font", fontSettings, 'font');
     // insertAdd('fonts');
     // insertAdd('effects');
-    createSetting("Colour Settings", colourSettings, 'colour', false);
+    createSetting("Colour", colourSettings, 'colour', false);
     // insertAdd('colour');
-    createSetting("Profile Settings", profileSettings, 'profile', false);
+    createSetting("Profile", profileSettings, 'profile', false);
     // insertAdd('profile');
 }
 

@@ -122,7 +122,7 @@ function convertToINIAndServe(ini) {
         }
         let fileSegment = ini[setting];
     }
-    // download('config.ini', fileText);
+    download('config.ini', fileText);
     console.log(fileText);
 }
 

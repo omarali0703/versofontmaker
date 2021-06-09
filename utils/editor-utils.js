@@ -1,40 +1,40 @@
 const baseSettings = [
     { type: 'select', id: 'blade_type', name: "Blade Type", description: 'The lighting setup for your build. TriCree setups use a single tricree or singlecree LED in the hilt of the saber. NeoPixel builds use a strip of LEDS that are installed inside the blade tube.', options: [{ name: "pixel", description: 'NeoPixel' }, { name: "tricree", description: 'TriCree/Cree LED' }] },
     { type: 'select', id: 'strip_type', name: "Strip Type", description: 'The type of LED strip inside of the blade tube. Consult your LED strip documentation to find out what standard your LED strip uses.', options: [{ name: 'ws2812', description: 'WS2812' }, { name: 'apa102', description: 'APA102' }] },
-    { type: 'input', id: 'pixel_count', name: "Blade Pixel Count", state: "HIDDEN", default:132},
-    { type: 'input', id: 'crossguard_pixel_count', name: "Cross Guard Pixel Count", state: "HIDDEN",default:0 },
-    { type: 'input', id: 'crossguard_delay', name: "Cross Guard Delay", state: "HIDDEN", default:0 },
-    { type: 'input', id: 'stand_by_after', name: 'Stand By After', default:30 },
-    { type: 'input', id: 'mute_mode_after', name: 'Mute Mode After', default:1000 },
-    { type: 'input', id: 'retraction_after', name: 'Retraction After', default:500 },
-    { type: 'input', id: 'double_click_time', name: 'Double-Click Time', default:250 },
-    { type: 'input', id: 'blaster_after', name: 'Blaster After', default:200 },
-    { type: 'input', id: 'master_volume', name: 'Master Volume', default:1.6 },
-    { type: 'multi-input-2', id: 'button_blink', name: 'Button Blink', default:[1000,1] },
-    { type: 'input', id: 'button_count', name: 'Button Count', default:2 },
-    { type: 'input', id: 'clash_sensitivity', name: 'Clash Sensitivity', default:300 },
+    { type: 'input', id: 'pixel_count', name: "Blade Pixel Count", state: "HIDDEN", default: 132 },
+    { type: 'input', id: 'crossguard_pixel_count', name: "Cross Guard Pixel Count", state: "HIDDEN", default: 0 },
+    { type: 'input', id: 'crossguard_delay', name: "Cross Guard Delay", state: "HIDDEN", default: 0 },
+    { type: 'input', id: 'stand_by_after', name: 'Stand By After', default: 30 },
+    { type: 'input', id: 'mute_mode_after', name: 'Mute Mode After', default: 1000 },
+    { type: 'input', id: 'retraction_after', name: 'Retraction After', default: 500 },
+    { type: 'input', id: 'double_click_time', name: 'Double-Click Time', default: 250 },
+    { type: 'input', id: 'blaster_after', name: 'Blaster After', default: 200 },
+    { type: 'input', id: 'master_volume', name: 'Master Volume', default: 1.6 },
+    { type: 'multi-input-2', id: 'button_blink', name: 'Button Blink', default: [1000, 1] },
+    { type: 'input', id: 'button_count', name: 'Button Count', default: 2 },
+    { type: 'input', id: 'clash_sensitivity', name: 'Clash Sensitivity', default: 300 },
 ]
 
 const fontSettings = [
-    { type: 'text-input', id: 'font_name', name: 'Font Name', default:'New Font' },
+    { type: 'text-input', id: 'font_name', name: 'Font Name', default: 'New Font' },
     { type: 'select', id: 'font_type', name: 'Font Type', options: [{ name: "smoothswing", description: 'Smoothswing' }, { name: "monophonic", description: 'Monophonic' }, { name: "polyphonic", description: 'Polyphonic' }] },
-    { type: 'text-input', id: 'sampling_frequency', name: 'Sampling Frequency', default:44100 },
-    { type: 'text-input', id: 'smoothswing_threshold', name: 'SmoothSwing Threshold', default:20 },
-    { type: 'text-input', id: 'smoothswing_sensitivity', name: 'SmoothSwing Sensitivity' , default:300},
-    { type: 'text-input', id: 'smoothswing_sharpness', name: 'SmoothSwing Sharpness', default:1.5 },
-    { type: 'text-input', id: 'smoothswing_hum_ducking', name: 'SmoothSwing Humducking', default:75 },
-    { type: 'text-input', id: 'smoothswing_max_volume', name: 'SmoothSwing Max Volume', default:0.95 },
-    { type: 'text-input', id: 'smoothswing_transition1', name: 'SmoothSwing Transition 1', default:60 },
-    { type: 'text-input', id: 'smoothswing_transition2', name: 'SmoothSwing Transition 2', default:180 },
-    { type: 'text-input', id: 'accentswing_high_threshold', name: 'AccentSwing High Threshold', default:300 },
-    { type: 'text-input', id: 'accentswing_low_threshold', name: 'AccentSwing Low Threshold', default:200 },
-    { type: 'text-input', id: 'hum_gain', name: 'Hum Gain', default:100.0 }
+    { type: 'text-input', id: 'sampling_frequency', name: 'Sampling Frequency', default: 44100 },
+    { type: 'text-input', id: 'smoothswing_threshold', name: 'SmoothSwing Threshold', default: 20 },
+    { type: 'text-input', id: 'smoothswing_sensitivity', name: 'SmoothSwing Sensitivity', default: 300 },
+    { type: 'text-input', id: 'smoothswing_sharpness', name: 'SmoothSwing Sharpness', default: 1.5 },
+    { type: 'text-input', id: 'smoothswing_hum_ducking', name: 'SmoothSwing Humducking', default: 75 },
+    { type: 'text-input', id: 'smoothswing_max_volume', name: 'SmoothSwing Max Volume', default: 0.95 },
+    { type: 'text-input', id: 'smoothswing_transition1', name: 'SmoothSwing Transition 1', default: 60 },
+    { type: 'text-input', id: 'smoothswing_transition2', name: 'SmoothSwing Transition 2', default: 180 },
+    { type: 'text-input', id: 'accentswing_high_threshold', name: 'AccentSwing High Threshold', default: 300 },
+    { type: 'text-input', id: 'accentswing_low_threshold', name: 'AccentSwing Low Threshold', default: 200 },
+    { type: 'text-input', id: 'hum_gain', name: 'Hum Gain', default: 100.0 }
 ];
 
 const effectSettings = [
-    { type: 'text-input', id: 'ignition_time', name: 'Ignition Time', default:250 },
-    { type: 'text-input', id: 'retraction_time', name: 'Retration Time', default:350 },
-    { type: 'text-input', id: 'transition_time', name: 'Transition Time', default:250 }
+    { type: 'text-input', id: 'ignition_time', name: 'Ignition Time', default: 250 },
+    { type: 'text-input', id: 'retraction_time', name: 'Retration Time', default: 350 },
+    { type: 'text-input', id: 'transition_time', name: 'Transition Time', default: 250 }
 ];
 
 const colourSettings = [
@@ -46,21 +46,21 @@ const colourSettings = [
 
 const profileSettings = [
     { type: 'select', id: 'flicker_type', name: 'Flicker Type', options: [{ name: "random", description: 'Random Flicker' }, { name: "flash", description: 'Flashing Flicker' }, { name: "fire", description: 'Fire' }] },
-    { type: 'multi-input-2', id: 'flicker_range', name: 'Flicker Range', default:[100,100] },
-    { type: 'text-input', id: 'flicker_frequency', name: 'Flicker Frequency', default:1 },
+    { type: 'multi-input-2', id: 'flicker_range', name: 'Flicker Range', default: [100, 100] },
+    { type: 'text-input', id: 'flicker_frequency', name: 'Flicker Frequency', default: 1 },
     { type: 'select', id: 'clash_type', name: 'Clash Type', options: [{ name: "random", description: 'Random Flicker' }, { name: "flash", description: 'Flashing Flicker' }, { name: "fire", description: 'Fire' }] },
-    { type: 'text-input', id: 'clash_duration', name: 'Clash Duration', default:25 },
-    { type: 'text-input', id: 'clash_frequency', name: 'Clash Frequency', default:100 },
+    { type: 'text-input', id: 'clash_duration', name: 'Clash Duration', default: 25 },
+    { type: 'text-input', id: 'clash_frequency', name: 'Clash Frequency', default: 100 },
     { type: 'select', id: 'lockup_type', name: 'Lockup Type', options: [{ name: "static", description: 'Static Lockup' }, { name: "flash", description: 'Flashing Flicker' }, { name: "fire", description: 'Fire' }] },
-    { type: 'text-input', id: 'lockup_frequency', name: 'Lockup Frequency', default:100 },
-    { type: 'text-input', id: 'lockup_percent', name: 'Lockup Percent', default:100 },
-    { type: 'text-input', id: 'lockup_centre', name: 'Lockup Centre', default:100 },
+    { type: 'text-input', id: 'lockup_frequency', name: 'Lockup Frequency', default: 100 },
+    { type: 'text-input', id: 'lockup_percent', name: 'Lockup Percent', default: 100 },
+    { type: 'text-input', id: 'lockup_centre', name: 'Lockup Centre', default: 100 },
     { type: 'select', id: 'blaster_type4', name: 'Blaster Type', options: [{ name: "static", description: 'Static Lockup' }, { name: "flash", description: 'Flashing Flicker' }, { name: "fire", description: 'Fire' }] },
-    { type: 'text-input', id: 'blaster_duration', name: 'Blaster Duration', default:30 },
-    { type: 'text-input', id: 'blaster_frequency', name: 'Blaster Frequency', default:100 },
-    { type: 'text-input', id: 'blaster_percent', name: 'Blaster Percent', default:100 },
-    { type: 'text-input', id: 'blaster_centre', name: 'Blaster Centre', default:100 },
-    { type: 'text-input', id: 'blaster_delay', name: 'Blaster Delay', default:100 }
+    { type: 'text-input', id: 'blaster_duration', name: 'Blaster Duration', default: 30 },
+    { type: 'text-input', id: 'blaster_frequency', name: 'Blaster Frequency', default: 100 },
+    { type: 'text-input', id: 'blaster_percent', name: 'Blaster Percent', default: 100 },
+    { type: 'text-input', id: 'blaster_centre', name: 'Blaster Centre', default: 100 },
+    { type: 'text-input', id: 'blaster_delay', name: 'Blaster Delay', default: 100 }
 
 ];
 
@@ -143,8 +143,8 @@ function generatePresetMaker(parent) {
     newPresetIcon.classList = 'fas fa-cross-circle icon-right';
     newPresetButton.textContent = 'Create New Preset';
     newPresetButton.appendChild(newPresetIcon);
-
-    newPresetButton.addEventListener('click', function() {
+    parent.appendChild(newPresetButton);
+    newPresetButton.addEventListener('click', function () {
         generatePresetContainer(parent);
     });
 }
@@ -154,6 +154,7 @@ function generatePresetContainer(parent) {
     presetContainer.classList = 'preset-container';
 
     let presetContainerTitle = document.createElement('span');
+    presetContainerTitle.classList = 'preset-title';
     presetContainerTitle.textContent = 'New Preset';
     let presetTop = document.createElement('div');
     presetTop.classList = 'preset-top';
@@ -163,18 +164,80 @@ function generatePresetContainer(parent) {
     deleteIcon.classList = 'fas fa-times-circle modal-close';
     presetDelete.appendChild(deleteIcon);
 
-    presetDelete.addEventListener('click', function() {
-        presetContainer.remove(); 
+    presetDelete.addEventListener('click', function () {
+        presetContainer.remove();
     });
 
-    // let presetInputs = 
+    let presetBody = document.createElement('div');
+    presetBody.classList = 'preset-body';
+    let presetColourInput = generatePresetSelect('colour', presetBody);
+    let presetFontInput = generatePresetSelect('font', presetBody);
+    let presetProfileInput = generatePresetSelect('profile', presetBody);
+    // color, profile, font
 
     presetTop.appendChild(presetContainerTitle);
     presetTop.appendChild(presetDelete);
     presetContainer.appendChild(presetTop);
+    presetContainer.appendChild(presetBody);
+    parent.appendChild(presetContainer);
+}
+
+function getAll(type) {
+    let all = document.querySelectorAll(`.basesetting-container[config='${type}']`);
+    let allElementsToReturn = [];
+    for (let element of all) {
+        let id = element.getAttribute('id');
+        allElementsToReturn.push(id);
+    }
+
+    return { type: type, elements: allElementsToReturn };
+}
+
+function generatePresetSelect(typeToGenerate, parent) {
+    let options = [];
+    options = getAll(typeToGenerate);
+    let selectContainer = document.createElement('div');
+    selectContainer.classList = 'preset-dropdown';
+    // {type:option, elements:[]}
+    let optionTitle = `Unset`;
+    let optionElement = document.createElement('div');
+    optionElement.classList = 'preset-dropdown-option';
+    optionElement.textContent = optionTitle;
+    selectContainer.appendChild(optionElement);
+
+    for (let option of options.elements) {
+        optionTitle = `${typeToGenerate} ${option}`;
+        optionElement = document.createElement('div');
+        optionElement.classList = 'preset-dropdown-option';
+        optionElement.textContent = optionTitle;
+        
+
+        selectContainer.appendChild(optionElement);
+    }
+
+    parent.appendChild(selectContainer);
+}
+
+function updatePresetDropdowns(typeToUpdate) {
+    switch (typeToUpdate) {
+        case 'colour':
+            break;
+        case 'font':
+            break;
+        case 'profile':
+            break;
+    }
 }
 
 
 function insertAfter(newNode, referenceNode) {
     referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+}
+
+function removeElement(element, arr) {
+    array = arr.filter(function (value, index, a) {
+        return value != element;
+    });
+
+    return array;
 }
