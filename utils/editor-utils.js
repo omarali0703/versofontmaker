@@ -139,10 +139,12 @@ function generateColourPicker(parent) {
 
 function generatePresetMaker(parent) {
     let newPresetButton = document.createElement('div');
+    newPresetButton.classList = 'btn new-preset';
+
     let newPresetIcon = document.createElement('i');
-    newPresetIcon.classList = 'fas fa-cross-circle icon-right';
-    newPresetButton.textContent = 'Create New Preset';
+    newPresetIcon.classList = 'fas fa-plus-circle icon-left';
     newPresetButton.appendChild(newPresetIcon);
+    newPresetButton.innerHTML += '<span>Create New Preset</span>';
     parent.appendChild(newPresetButton);
     newPresetButton.addEventListener('click', function () {
         generatePresetContainer(parent);
@@ -170,9 +172,51 @@ function generatePresetContainer(parent) {
 
     let presetBody = document.createElement('div');
     presetBody.classList = 'preset-body';
-    let presetColourInput = generatePresetSelect('colour', presetBody);
-    let presetFontInput = generatePresetSelect('font', presetBody);
-    let presetProfileInput = generatePresetSelect('profile', presetBody);
+
+    let selectorContainer = document.createElement('div');
+    selectorContainer.classList = 'preset-selector-container';
+
+    let colourSelector = document.createElement('select');
+    let profileSelector = document.createElement('select');
+    let fontSelector = document.createElement('select');
+
+    let colourSelectorLabel = document.createElement('label');
+    let profileSelectorLabel = document.createElement('label');
+    let fontSelectorLabel = document.createElement('label');
+
+    colourSelector.setAttribute('id', 'colour-selector')
+    profileSelector.setAttribute('id', 'profile-selector')
+    fontSelector.setAttribute('id', 'font-selector')
+
+    generatePresetSelect('colour', colourSelector);
+    generatePresetSelect('profile', profileSelector);
+    generatePresetSelect('font', fontSelector);
+
+    colourSelectorLabel.setAttribute('for', '#colour-selector');
+    profileSelectorLabel.setAttribute('for', '#profile-selector');
+    fontSelectorLabel.setAttribute('for', '#font-selector');
+
+    colourSelectorLabel.textContent = "Preset Colour";
+    profileSelectorLabel.textContent = "Preset Profile";
+    fontSelectorLabel.textContent = "Preset Font";
+
+    selectorContainer.appendChild(colourSelectorLabel);
+    selectorContainer.appendChild(colourSelector);
+    presetBody.appendChild(selectorContainer);
+
+    selectorContainer = document.createElement('div');
+    selectorContainer.classList = 'preset-selector-container';
+    selectorContainer.appendChild(profileSelectorLabel);
+    selectorContainer.appendChild(profileSelector);
+    presetBody.appendChild(selectorContainer);
+
+    selectorContainer = document.createElement('div');
+    selectorContainer.classList = 'preset-selector-container';
+    selectorContainer.appendChild(fontSelectorLabel);
+    selectorContainer.appendChild(fontSelector);
+    presetBody.appendChild(selectorContainer);
+
+
     // color, profile, font
 
     presetTop.appendChild(presetContainerTitle);
@@ -180,6 +224,7 @@ function generatePresetContainer(parent) {
     presetContainer.appendChild(presetTop);
     presetContainer.appendChild(presetBody);
     parent.appendChild(presetContainer);
+
 }
 
 function getAll(type) {
@@ -196,37 +241,40 @@ function getAll(type) {
 function generatePresetSelect(typeToGenerate, parent) {
     let options = [];
     options = getAll(typeToGenerate);
-    let selectContainer = document.createElement('div');
-    selectContainer.classList = 'preset-dropdown';
-    // {type:option, elements:[]}
     let optionTitle = `Unset`;
-    let optionElement = document.createElement('div');
+    let optionElement = document.createElement('option');
     optionElement.classList = 'preset-dropdown-option';
     optionElement.textContent = optionTitle;
-    selectContainer.appendChild(optionElement);
-
+    parent.appendChild(optionElement);
     for (let option of options.elements) {
         optionTitle = `${typeToGenerate} ${option}`;
-        optionElement = document.createElement('div');
-        optionElement.classList = 'preset-dropdown-option';
-        optionElement.textContent = optionTitle;
-        
-
-        selectContainer.appendChild(optionElement);
+        optionElement = document.createElement('option');
+        optionElement.innerHTML = optionTitle;
+        optionElement.setAttribute('value', option);
+        parent.appendChild(optionElement);
     }
-
-    parent.appendChild(selectContainer);
 }
 
-function updatePresetDropdowns(typeToUpdate) {
-    switch (typeToUpdate) {
-        case 'colour':
-            break;
-        case 'font':
-            break;
-        case 'profile':
-            break;
+function updatePresetDropdowns(typeToUpdate, triggerModal) {
+    if (typeToUpdate == 'base' || typeToUpdate == 'effects') { return; }
+    if(doNoShowAgainPresets == false && triggerModal) {
+        console.log('hi');
+        openModal('Deleting Preset Elements', 'no-show-again', 'You appeared to have deleted an option that is currently being used by a preset. Deleting this option will reset any preset dropdown that is assigned to this option. The rest of the dropdowns will not be affected.', function() {
+            console.log(typeToUpdate);
+            let previousOptions = currentOptions[typeToUpdate];
+            let newOptions = getAll(typeToUpdate).elements;
+            console.log(newOptions, previousOptions);
+            if (newOptions.length < previousOptions.length) {
+                let optionsToReset = document.querySelectorAll(`#${typeToUpdate}-selector`);
+                console.log(`#${typeToUpdate}-selector`);
+                for (let option of optionsToReset) {
+                    option.innerHTML = '';
+                    generatePresetSelect(typeToUpdate, option);
+                }
+            }
+        })
     }
+    
 }
 
 
@@ -235,9 +283,13 @@ function insertAfter(newNode, referenceNode) {
 }
 
 function removeElement(element, arr) {
+    console.log(element, arr);
     array = arr.filter(function (value, index, a) {
         return value != element;
     });
+
+    console.log(element, array);
+
 
     return array;
 }

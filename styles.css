@@ -220,8 +220,15 @@ footer {
     font-size: 10pt;
     height: 20px;
     text-transform: uppercase;
+    opacity: 1;
     cursor: pointer;
+    transition: opacity 0.2s;
     display:flex;
+}
+
+.btn:hover {
+    transition: opacity 0.2s;
+    opacity: 0.5;
 }
 
 .btn-new,
@@ -248,7 +255,7 @@ footer {
 
 }
 
-.btn-export {
+.btn-export, .new-preset {
     color: white;
     background-color: #00c41d;
 
@@ -531,44 +538,19 @@ footer {
 .preset-body {
     /* overflow-y: hidden; */
     padding: 15px;
-    height:130px;
     display: grid;
     /* grid-template-rows: 50px 50px; */
     /* min-height: 40px; */
 }
 
-.preset-dropdown {
-    font-family:Lato;
-    box-shadow: 2px 2px 20px 0px #0000001f;
-    max-height:30px;
-    transition: max-height 0.5s ease-in;
-    overflow:hidden;
-    /* margin-bottom:20px; */
-    /* position: absolute; */
-    /* z-index: 2; */
-    /* display: table-row; */
-    /* grid-template-rows: 40px 40px; */
+.new-preset{
+    margin-top: 20px;
+   
 }
 
-.preset-dropdown:hover {
-    max-height:100px;
-    transition: max-height 0.5s ease-out;
+.preset-selector-container {
+    display: grid;
+    margin-bottom: 10px;
 }
-
-.preset-dropdown-option {
-    transition: background-color 1s;
-    transition: color 0.3s;
-    background-color: white;
-    padding: 5px;
-    min-height: 30px;
-}
-
-.preset-dropdown-option:hover {
-    transition: background-color 1s;
-       transition: color 0.3s;
-     background-color: #0088ff;
-    color:white;
-}
- 
 
 /* END PRESET */

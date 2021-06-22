@@ -10,8 +10,19 @@ window.addEventListener('load', function () {
 });
 
 
+var modalQueue = [];
 
-function openModal(title, type, body = '', questionYesEvent) {
+function openModal(title, type, body = '', questionYesEvent, haltModal) {
+    // let uniqueID = uuidv4();
+    // modalQueue.push(uniqueID);
+
+
+    if (modalQueue.length > 0 && modalQueue) {
+        modalQueue.push(openModal(title, type, body, questionYesEvent, haltModal));
+        return;
+    }
+
+
     var modalDescription = document.querySelector('.modal-inner');
     var modalBottom = document.querySelector('.modal-bottom');
     var bottomButtons = modalBottom.querySelector('div.modal-btn-group');
@@ -25,6 +36,35 @@ function openModal(title, type, body = '', questionYesEvent) {
     if (type == 'question') {
         let yesButton = createModalButton(bottomButtons, 'Yes', 'fas fa-check-circle', function () {
             questionYesEvent();
+            // modalQueue.pop(uniqueID);
+            modalQueue.pop()();
+            checkHaltedModals();
+            modal.style.display = 'none';
+        });
+        let noButton = createModalButton(bottomButtons, 'No', 'fas fa-times-circle', function () {
+            modal.style.display = 'none';
+            checkHaltedModals();
+            modalQueue.pop()();
+            // modalQueue.pop(uniqueID);
+
+        });
+    } else if (type == 'no-show-again') {
+        let tickboxLabel = document.createElement('label');
+        tickboxLabel.innerHTML = 'Do not show this dialogue again?';
+        let tickContainer = document.createElement('div');
+        tickContainer.appendChild(tickboxLabel)
+        let tickBox = document.createElement('input');
+        tickBox.setAttribute('type', 'checkbox');
+        tickContainer.appendChild(tickBox)
+        bottomButtons.appendChild(tickContainer);
+
+        tickBox.addEventListener('change', function (e) {
+            console.log(tickBox.checked);
+            doNoShowAgainPresets = tickBox.checked;
+        });
+
+        let yesButton = createModalButton(bottomButtons, 'Yes', 'fas fa-check-circle', function () {
+            questionYesEvent();
             modal.style.display = 'none';
         });
         let noButton = createModalButton(bottomButtons, 'No', 'fas fa-times-circle', function () {
@@ -36,6 +76,11 @@ function openModal(title, type, body = '', questionYesEvent) {
     //     case "export":
     //         break;
     // }
+
+    function checkHaltedModals() {
+        if (modalQueue.length > 0 && modalQueue) { haltModal() }
+
+    }
 
     modal.style.display = 'block';
 }

@@ -5,7 +5,13 @@ Happy Sabesmithing!
 <br>
 Omar Ali, 2021`;
 
-var colours = [], fonts = [], profiles = [];
+var currentOptions = {
+    colour: [],
+    font: [],
+    profile: []
+};
+
+var doNoShowAgainPresets = true;
 
 window.addEventListener('load', function () {
     var importButton = document.querySelector('.btn-import');
@@ -90,20 +96,19 @@ function createSetting(title, baseSettings, configType, insertNext, deletable) {
             openModal("Are you sure?", 'question', 'This process cannot be undone.', function () {
 
                 baseSettingsContainer.remove();
-                console.log(id, 'DELETING');
 
                 switch (configType) {
                     case 'font':
-                        fonts = removeElement(id, fonts);
+                        currentOptions.font = removeElement(id, currentOptions.font);
                         break;
                     case 'profile':
-                        profiles = removeElement(id, profiles);
+                        currentOptions.profiles = removeElement(id, currentOptions.profile);
                         break;
                     case 'colour':
-                        colours = removeElement(id, colours);
+                        currentOptions.colours = removeElement(id, currentOptions.colour);
                         break;
                 }
-                updatePresetDropdowns(configType);
+                updatePresetDropdowns(configType, true);
                 toastr.success(`Successfully removed ${configType} ${id}.`);
 
             });
@@ -202,27 +207,22 @@ function createSetting(title, baseSettings, configType, insertNext, deletable) {
 
         inputGroup.appendChild(label);
         inputGroup.appendChild(field);
-        console.log(configType);
         // Add extra mini-editors for effects (and other sections too)
 
 
         baseSettingsContainer.appendChild(inputGroup);
     }
+    if (configType != 'base' && configType != 'effects') {
+        console.log(configType);
+        currentOptions[configType].push(count);
+    }
+
     switch (configType) {
         case 'effects':
-            console.log('teststs')
             generatePresetMaker(baseSettingsContainer);
             break;
-        case 'colour':
-            colours.push(count);
-            break;
-        case 'profile':
-            profiles.push(count);
-            break;
-        case 'font':
-            fonts.push(count);
-            break;
     }
+
 
     if (insertNext) {
         let parent = document.querySelector('.main-container');
@@ -231,6 +231,9 @@ function createSetting(title, baseSettings, configType, insertNext, deletable) {
     } else {
         document.querySelector('.main-container').appendChild(baseSettingsContainer);
     }
+
+    updatePresetDropdowns(configType, false);
+
 }
 
 function initialisePage() {
@@ -245,6 +248,8 @@ function initialisePage() {
     // insertAdd('colour');
     createSetting("Profile", profileSettings, 'profile', false);
     // insertAdd('profile');
+
+    doNoShowAgainPresets = false;
 }
 
 /*function insertAdd(type) {
