@@ -2,6 +2,8 @@ function exportConfig() {
     let inputs = document.querySelectorAll('.basesetting-container');
     let outputObject = { settings: {} };
     let error = false;
+    let presets = document.querySelectorAll('.preset-container');
+    let presetStr = '', presetCounter = 1;
     parentloop:
     for (let input of inputs) {
         let configType = input.getAttribute('config');
@@ -54,10 +56,12 @@ function exportConfig() {
                 /*case "effects":
                     outputObject['effect'][key] = value;
                     break;
-                case "profile":
-                    outputObject.settings[key] = value;
-                    break;
                     */
+                case "profile":
+                    if (!(`profile${number}` in outputObject)) { outputObject[`profile${number}`] = {}; }
+                    outputObject[`profile${number}`][key] = value;
+                    break;
+                    
                 case "colour":
                     console.log(key)
                     if (!(`colour${number}` in outputObject)) { outputObject[`colour${number}`] = {}; }
@@ -70,6 +74,19 @@ function exportConfig() {
         }
 
     }
+
+    for (let preset of presets) {
+        let colourSelect = preset.querySelector('#colour-selector').value;
+        let profileSelect = preset.querySelector('#profile-selector').value;
+        let fontSelect = preset.querySelector('#font-selector').value;
+
+        presetStr += `preset${presetCounter} = ${colourSelect},${profileSelect},${fontSelect}\n`;
+        presetCounter += 1;
+
+    }
+
+    outputObject['presets'] = presetStr;
+    
     console.log(outputObject);
 
     if (error) {
@@ -105,7 +122,18 @@ function convertToINIAndServe(ini) {
             }
             fileText += '\n';
 
-        }
+        } else if (setting == 'presets') {
+            fileText += ini.presets;
+        } else if (setting.includes('profile')) {
+            let number = setting.split('profile')[1];
+            for (let settingElement in ini[setting]) {
+                let key = settingElement, value = ini[setting][settingElement];
+                value = value.replaceAll(' ', '_');
+                fileText += `${key}${number} = ${value} \n`;
+            }
+            fileText += '\n';
+
+        } 
         if (setting.includes('colour')) {
             if (addedEffectsHeader == false) {
                 fileText += '[effects] \n';
