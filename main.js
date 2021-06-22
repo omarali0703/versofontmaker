@@ -22,19 +22,23 @@ window.addEventListener('load', function () {
     var aboutPopup = document.querySelector('.btn-about');
 
     importButton.onclick = function () {
-        openModal('Import Config', 'import', `<form action="/file-upload"
-    class="dropzone"
-    id="my-awesome-dropzone"></form>`); var dropzone = new Dropzone("#my-awesome-dropzone", { url: "/file/post" });
+        openModal({
+            title: 'Import Config', type: 'import', body: `<form action="/file-upload"
+            class="dropzone"
+            id="my-awesome-dropzone"></form>`});
+        var dropzone = new Dropzone("#my-awesome-dropzone", { url: "/file/post" });
     }
     exportButton.onclick = function () { /*openModal('Export Config', 'export', '');*/ exportConfig(); }
-    shareButton.onclick = function () { openModal('Share Config', 'share', ''); }
+    shareButton.onclick = function () { openModal({ title: 'Share Config', type: 'share', body: '' }); }
     createNewConfig.onclick = function () {
-        openModal('Create New Config', 'question', 'Are you sure you want to start a new config file?', function () {
-            initialisePage();
+        openModal({
+            title: 'Create New Config', type: 'question', body: 'Are you sure you want to start a new config file?', questionYesEvent: function () {
+                initialisePage();
+            }
         });
     }
-    createNewFont.onclick = function () { openModal('Create A New Font', 'create-font', 'This feature has not yet been implemented.'); }
-    aboutPopup.onclick = function () { openModal('About', 'about', about); }
+    createNewFont.onclick = function () { openModal({ title: 'Create A New Font', type: 'create-font', body: 'This feature has not yet been implemented.' }); }
+    aboutPopup.onclick = function () { openModal({ title: 'About', type: 'about', body: about }); }
 
     // Toolbox
     let newFont = document.querySelector('.create-font');
@@ -93,24 +97,30 @@ function createSetting(title, baseSettings, configType, insertNext, deletable) {
         let id = baseSettingsContainer.getAttribute('id');
         console.log(id);
         closeDeleteIcon.addEventListener('click', function () {
-            openModal("Are you sure?", 'question', 'This process cannot be undone.', function () {
+            openModal({
+                title: "Are you sure?", type: 'question', body: 'This process cannot be undone.',
+                questionYesEvent: function () {
 
-                baseSettingsContainer.remove();
+                    baseSettingsContainer.remove();
 
-                switch (configType) {
-                    case 'font':
-                        currentOptions.font = removeElement(id, currentOptions.font);
-                        break;
-                    case 'profile':
-                        currentOptions.profiles = removeElement(id, currentOptions.profile);
-                        break;
-                    case 'colour':
-                        currentOptions.colours = removeElement(id, currentOptions.colour);
-                        break;
+                    switch (configType) {
+                        case 'font':
+                            currentOptions.font = removeElement(id, currentOptions.font);
+                            break;
+                        case 'profile':
+                            currentOptions.profiles = removeElement(id, currentOptions.profile);
+                            break;
+                        case 'colour':
+                            currentOptions.colours = removeElement(id, currentOptions.colour);
+                            break;
+                    }
+                    toastr.success(`Successfully removed ${configType} ${id}.`);
+
+                },
+                    
+                afterClose:function () {
+                    updatePresetDropdowns(configType, true);
                 }
-                updatePresetDropdowns(configType, true);
-                toastr.success(`Successfully removed ${configType} ${id}.`);
-
             });
         })
         baseSettingsContainer.appendChild(closeDeleteIcon);
@@ -199,7 +209,7 @@ function createSetting(title, baseSettings, configType, insertNext, deletable) {
         info.appendChild(infoIcon);
 
         info.addEventListener('click', function () {
-            openModal('Information', 'info', '');
+            openModal({ title: 'Information', type: 'info', body: '' });
             document.querySelector('.modal-inner').textContent = setting.description;
         });
 

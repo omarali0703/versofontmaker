@@ -75,7 +75,7 @@ footer {
     margin-top: 10px;
     font-family: Lato;
     font-weight: lighter;
-    
+
     min-height: 50px;
 }
 
@@ -84,23 +84,23 @@ footer {
     margin-left: 0px;
 }
 
-.input-group > select {
-    border-style:none;
+.input-group>select {
+    border-style: none;
     font-family: Lato-Thin;
 }
 
-.input-group > select {
-    border-style:none;
+.input-group>select {
+    border-style: none;
 }
 
 .input-group>select:active {
-       outline:none;
-       border-style:none;
+    outline: none;
+    border-style: none;
 }
 
 .input-group>select:focus {
-    outline:none;
-    border-style:none;
+    outline: none;
+    border-style: none;
 
 }
 
@@ -112,23 +112,23 @@ footer {
     border-bottom: 2px solid gainsboro;
     width: 100%;
     height: 100%;
-    outline:none;
-    border-style:none none solid;
+    outline: none;
+    border-style: none none solid;
 }
 
 
-.input-group > input:hover {
-        transition: border-bottom 0.5s;
+.input-group>input:hover {
+    transition: border-bottom 0.5s;
     border-bottom: 2px solid #0088ff;
 
 }
 
-.input-group > input:active {
+.input-group>input:active {
     transition: border-bottom 0.5s;
     border-bottom: 2px solid #0088ff;
 }
 
-.input-group > input:focus {
+.input-group>input:focus {
     border-bottom: 2px solid #0088ff;
 
 }
@@ -223,7 +223,7 @@ footer {
     opacity: 1;
     cursor: pointer;
     transition: opacity 0.2s;
-    display:flex;
+    display: flex;
 }
 
 .btn:hover {
@@ -255,17 +255,34 @@ footer {
 
 }
 
-.btn-export, .new-preset {
+.btn-export,
+.new-preset {
     color: white;
     background-color: #00c41d;
 
 }
 
+.new-preset {
+    margin: 0;
+    margin-bottom: 10px;
+    background-color: unset;
+    color:#00c41d;
+    opacity: 1;
+    transition: unset;
+}
+
+.new-preset:hover {
+    opacity: 1;
+    background-color: #00000010;
+}
+
 .btn-share {
     background-color: #0088ff;
     color: white;
+}
 
-
+.btn>i {
+    font-size: 18pt;
 }
 
 
@@ -395,7 +412,7 @@ footer {
     top: 0px;
     transition: opacity 0.4s, top 0.4s;
     width: 100%;
-    
+
 }
 
 .toolbox:hover {
@@ -514,15 +531,17 @@ footer {
 /* END ICONS */
 
 /* START PRESET */
-.preset-top {display: grid;}
+.preset-top {
+    display: grid;
+}
 
 .preset-container {
     display: grid;
     margin-bottom: 20px;
     border: 1px dotted gainsboro;
-    border-radius: 10px;
+    border-radius: 0px;
     padding: 10px;
-    font-family:Lato;
+    font-family: Lato;
 }
 
 .preset-delete {
@@ -531,7 +550,7 @@ footer {
 
 .preset-title {
     grid-column-start: 1;
-    font-family:Lato-Black;
+    font-family: Lato-Black;
 
 }
 
@@ -543,9 +562,9 @@ footer {
     /* min-height: 40px; */
 }
 
-.new-preset{
+.new-preset {
     margin-top: 20px;
-   
+
 }
 
 .preset-selector-container {

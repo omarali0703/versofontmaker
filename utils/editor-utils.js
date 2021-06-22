@@ -174,7 +174,7 @@ function generatePresetContainer(parent) {
     presetBody.classList = 'preset-body';
 
     let selectorContainer = document.createElement('div');
-    selectorContainer.classList = 'preset-selector-container';
+    selectorContainer.classList = 'preset-selector-container input-group';
 
     let colourSelector = document.createElement('select');
     let profileSelector = document.createElement('select');
@@ -205,13 +205,13 @@ function generatePresetContainer(parent) {
     presetBody.appendChild(selectorContainer);
 
     selectorContainer = document.createElement('div');
-    selectorContainer.classList = 'preset-selector-container';
+    selectorContainer.classList = 'preset-selector-container input-group';
     selectorContainer.appendChild(profileSelectorLabel);
     selectorContainer.appendChild(profileSelector);
     presetBody.appendChild(selectorContainer);
 
     selectorContainer = document.createElement('div');
-    selectorContainer.classList = 'preset-selector-container';
+    selectorContainer.classList = 'preset-selector-container input-group';
     selectorContainer.appendChild(fontSelectorLabel);
     selectorContainer.appendChild(fontSelector);
     presetBody.appendChild(selectorContainer);
@@ -243,6 +243,7 @@ function generatePresetSelect(typeToGenerate, parent) {
     options = getAll(typeToGenerate);
     let optionTitle = `Unset`;
     let optionElement = document.createElement('option');
+    optionElement.setAttribute('value', 'unset');
     optionElement.classList = 'preset-dropdown-option';
     optionElement.textContent = optionTitle;
     parent.appendChild(optionElement);
@@ -257,24 +258,33 @@ function generatePresetSelect(typeToGenerate, parent) {
 
 function updatePresetDropdowns(typeToUpdate, triggerModal) {
     if (typeToUpdate == 'base' || typeToUpdate == 'effects') { return; }
-    if(doNoShowAgainPresets == false && triggerModal) {
-        console.log('hi');
-        openModal('Deleting Preset Elements', 'no-show-again', 'You appeared to have deleted an option that is currently being used by a preset. Deleting this option will reset any preset dropdown that is assigned to this option. The rest of the dropdowns will not be affected.', function() {
-            console.log(typeToUpdate);
-            let previousOptions = currentOptions[typeToUpdate];
-            let newOptions = getAll(typeToUpdate).elements;
-            console.log(newOptions, previousOptions);
-            if (newOptions.length < previousOptions.length) {
-                let optionsToReset = document.querySelectorAll(`#${typeToUpdate}-selector`);
-                console.log(`#${typeToUpdate}-selector`);
-                for (let option of optionsToReset) {
-                    option.innerHTML = '';
-                    generatePresetSelect(typeToUpdate, option);
+    if (doNoShowAgainPresets == false && triggerModal) {
+        openModal({
+            title: 'Deleting Preset Elements', type: 'no-show-again', body: 'You appeared to have deleted an option that is currently being used by a preset. Deleting this option will reset any preset dropdown that is assigned to this option. The rest of the dropdowns will not be affected.', questionYesEvent: function () {
+                console.log(typeToUpdate);
+                let previousOptions = currentOptions[typeToUpdate];
+                let newOptions = getAll(typeToUpdate).elements;
+                console.log(newOptions, previousOptions);
+                if (newOptions.length < previousOptions.length) {
+                    let optionsToReset = document.querySelectorAll(`#${typeToUpdate}-selector`);
+                    console.log(`#${typeToUpdate}-selector`);
+                    for (let option of optionsToReset) {
+                        option.innerHTML = '';
+                        generatePresetSelect(typeToUpdate, option);
+                    }
                 }
             }
-        })
+        });
+    } else {
+        let options = document.querySelectorAll(`#${typeToUpdate}-selector`);
+
+        for (let option of options) {
+            let previousValue = option.value;
+            option.innerHTML = '';
+            generatePresetSelect(typeToUpdate, option);
+            option.value = previousValue;
+        }
     }
-    
 }
 
 

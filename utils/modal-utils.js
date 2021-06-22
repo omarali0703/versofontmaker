@@ -1,28 +1,28 @@
 window.addEventListener('load', function () {
     var modal = document.querySelector('.modal');
     var closeBtn = document.querySelector('.modal-close');
-
-
     closeBtn.onclick = function () {
         modal.style.display = 'none';
     }
-
 });
-
 
 var modalQueue = [];
 
-function openModal(title, type, body = '', questionYesEvent, haltModal) {
-    // let uniqueID = uuidv4();
-    // modalQueue.push(uniqueID);
+function openModal(params) {
+    console.log(params)
 
+    modalQueue.push(params);
+    let close = true;
 
-    if (modalQueue.length > 0 && modalQueue) {
-        modalQueue.push(openModal(title, type, body, questionYesEvent, haltModal));
-        return;
+    let current = modalQueue.pop();
+    if ('close' in current) {
+        close = current.close;
     }
-
-
+    let title = current.title;
+    let type = current.type;
+    let body = current.body;
+    let questionYesEvent = current.questionYesEvent;
+    let afterClose = current.afterClose;
     var modalDescription = document.querySelector('.modal-inner');
     var modalBottom = document.querySelector('.modal-bottom');
     var bottomButtons = modalBottom.querySelector('div.modal-btn-group');
@@ -30,22 +30,30 @@ function openModal(title, type, body = '', questionYesEvent, haltModal) {
     modalDescription.innerHTML = "";
     var modalTitle = document.querySelector('.modal-title')
     var modal = document.querySelector('.modal');
+    modal.style.display = 'block';
+
     if (body) {
         modalDescription.innerHTML = body;
     }
     if (type == 'question') {
         let yesButton = createModalButton(bottomButtons, 'Yes', 'fas fa-check-circle', function () {
             questionYesEvent();
-            // modalQueue.pop(uniqueID);
-            modalQueue.pop()();
             checkHaltedModals();
-            modal.style.display = 'none';
+            if (close) {
+                modal.style.display = 'none';
+                if (afterClose) {
+                    afterClose();
+                }
+            }
         });
         let noButton = createModalButton(bottomButtons, 'No', 'fas fa-times-circle', function () {
-            modal.style.display = 'none';
             checkHaltedModals();
-            modalQueue.pop()();
-            // modalQueue.pop(uniqueID);
+            if (close) {
+                modal.style.display = 'none';
+                if (afterClose) {
+                    afterClose();
+                }
+            }
 
         });
     } else if (type == 'no-show-again') {
@@ -62,27 +70,39 @@ function openModal(title, type, body = '', questionYesEvent, haltModal) {
             console.log(tickBox.checked);
             doNoShowAgainPresets = tickBox.checked;
         });
-
-        let yesButton = createModalButton(bottomButtons, 'Yes', 'fas fa-check-circle', function () {
+        let yes = createModalButton(bottomButtons, 'Yes', 'fas fa-clipboard-check', function () {
+            checkHaltedModals();
             questionYesEvent();
-            modal.style.display = 'none';
+            if (close) {
+                modal.style.display = 'none';
+                if (afterClose) {
+                    afterClose();
+                }
+            
+            }
         });
-        let noButton = createModalButton(bottomButtons, 'No', 'fas fa-times-circle', function () {
-            modal.style.display = 'none';
+        let no = createModalButton(bottomButtons, 'No', 'fas fa-clipboard-check', function () {
+            checkHaltedModals();
+            if (close) {
+                modal.style.display = 'none';
+                if (afterClose) {
+                    afterClose();
+                }
+            
+            }
         });
     }
+
     modalTitle.textContent = title;
     // switch (type) {
     //     case "export":
     //         break;
     // }
 
+   
     function checkHaltedModals() {
-        if (modalQueue.length > 0 && modalQueue) { haltModal() }
-
+        if (modalQueue.length > 0) { openModal(modalQueue.pop()); }
     }
-
-    modal.style.display = 'block';
 }
 
 function createModalButton(parent, name, iconClass, clickEvent) {
@@ -90,7 +110,6 @@ function createModalButton(parent, name, iconClass, clickEvent) {
     let buttonText = document.createElement('div');
     buttonText.textContent = name;
     button.classList = 'modal-btn';
-
     if (iconClass) {
         let icon = document.createElement('i');
         let iconSpan = document.createElement('span');
@@ -100,8 +119,6 @@ function createModalButton(parent, name, iconClass, clickEvent) {
         buttonText.appendChild(iconSpan);
     }
     button.appendChild(buttonText);
-
-
     button.addEventListener('click', clickEvent);
     parent.appendChild(button);
 }
