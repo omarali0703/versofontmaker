@@ -26,16 +26,16 @@ window.addEventListener('load', function () {
             title: 'Import Config', type: 'import', body: `<form class="dropzone" action="/uploadIgnore.php" id="my-awesome-dropzone"></form>`
         });
         var dropzone = new Dropzone("#my-awesome-dropzone", {
-            acceptedFiles:'.ini',
+            acceptedFiles: '.ini',
             autoProcessQueue: false,
-            addRemoveLinks:false
+            addRemoveLinks: false
         });
 
-        dropzone.on('error', function(err) {
+        dropzone.on('error', function (err) {
             toastr.error('Error uploading file.');
-            
+
         });
-        
+
         dropzone.on("addedfile", function (file) {
             console.log(file);
 
@@ -290,9 +290,10 @@ function readFileAndLoadSettings(data) {
     let iniFileData = parseINIString(data);
 
     console.log(iniFileData);
+    initialisePage(iniFileData);
 }
 
-function initialisePage() {
+function initialisePage(iniFileData = null) {
     document.querySelector('.main-container').innerHTML = '';
 
     createSetting("Main Saber Settings", baseSettings, 'base', false);
@@ -308,7 +309,7 @@ function initialisePage() {
     doNoShowAgainPresets = false;
 }
 
-/*function insertAdd(type) {
+/*function insertAdd(type)
     let addElement = document.createElement('div');
     addElement.classList = "add-element icon-green";
     let addElementButton = document.createElement('div');
