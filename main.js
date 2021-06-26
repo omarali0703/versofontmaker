@@ -23,10 +23,42 @@ window.addEventListener('load', function () {
 
     importButton.onclick = function () {
         openModal({
-            title: 'Import Config', type: 'import', body: `<form action="/file-upload"
-            class="dropzone"
-            id="my-awesome-dropzone"></form>`});
-        var dropzone = new Dropzone("#my-awesome-dropzone", { url: "/file/post" });
+            title: 'Import Config', type: 'import', body: `<form class="dropzone" action="/uploadIgnore.php" id="my-awesome-dropzone"></form>`
+        });
+        var dropzone = new Dropzone("#my-awesome-dropzone", {
+            acceptedFiles:'.ini',
+            autoProcessQueue: false,
+            addRemoveLinks:false
+        });
+
+        dropzone.on('error', function(err) {
+            toastr.error('Error uploading file.');
+            
+        });
+        
+        dropzone.on("addedfile", function (file) {
+            console.log(file);
+
+            const reader = new FileReader();
+
+            reader.onload = () => {
+                toastr.success('File successfully uploaded');
+                const fileAsBinaryString = reader.result;
+                console.log(fileAsBinaryString);
+                processFile(fileAsBinaryString);
+            };
+
+            reader.onabort = () => {
+                toastr.error('File upload aborted.');
+            };
+
+            reader.onerror = () => {
+                toastr.error('Error uploading file.');
+            }
+
+            reader.readAsBinaryString(file);
+            /* Maybe display some more file information on your page */
+        });
     }
     exportButton.onclick = function () { /*openModal('Export Config', 'export', '');*/ exportConfig(); }
     shareButton.onclick = function () { openModal({ title: 'Share Config', type: 'share', body: '' }); }
@@ -117,8 +149,8 @@ function createSetting(title, baseSettings, configType, insertNext, deletable) {
                     toastr.success(`Successfully removed ${configType} ${id}.`);
 
                 },
-                    
-                afterClose:function () {
+
+                afterClose: function () {
                     updatePresetDropdowns(configType, true);
                 }
             });
@@ -244,6 +276,18 @@ function createSetting(title, baseSettings, configType, insertNext, deletable) {
 
     updatePresetDropdowns(configType, false);
 
+}
+
+function processFile(data) {
+    openModal({
+        title: 'Import Config', type: 'question', body: 'Are you sure you want to override your current changes with the imported config?', questionYesEvent: function () {
+            readFileAndLoadSettings(data);
+        }
+    });
+}
+
+function readFileAndLoadSettings(data) {
+    
 }
 
 function initialisePage() {

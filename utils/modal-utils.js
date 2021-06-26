@@ -70,7 +70,7 @@ function openModal(params) {
             console.log(tickBox.checked);
             doNoShowAgainPresets = tickBox.checked;
         });
-        let yes = createModalButton(bottomButtons, 'Yes', 'fas fa-clipboard-check', function () {
+        let yes = createModalButton(bottomButtons, 'Yes', 'fas fa-check-circle', function () {
             checkHaltedModals();
             questionYesEvent();
             if (close) {
@@ -81,7 +81,7 @@ function openModal(params) {
             
             }
         });
-        let no = createModalButton(bottomButtons, 'No', 'fas fa-clipboard-check', function () {
+        let no = createModalButton(bottomButtons, 'No', 'fas fa-times-circle', function () {
             checkHaltedModals();
             if (close) {
                 modal.style.display = 'none';
@@ -103,6 +103,11 @@ function openModal(params) {
     function checkHaltedModals() {
         if (modalQueue.length > 0) { openModal(modalQueue.pop()); }
     }
+}
+
+function closeModal() {
+    var modal = document.querySelector('.modal');
+    modal.style.display = 'none';
 }
 
 function createModalButton(parent, name, iconClass, clickEvent) {

@@ -61,7 +61,7 @@ function exportConfig() {
                     if (!(`profile${number}` in outputObject)) { outputObject[`profile${number}`] = {}; }
                     outputObject[`profile${number}`][key] = value;
                     break;
-                    
+
                 case "colour":
                     console.log(key)
                     if (!(`colour${number}` in outputObject)) { outputObject[`colour${number}`] = {}; }
@@ -86,7 +86,7 @@ function exportConfig() {
     }
 
     outputObject['presets'] = presetStr;
-    
+
     console.log(outputObject);
 
     if (error) {
@@ -133,7 +133,7 @@ function convertToINIAndServe(ini) {
             }
             fileText += '\n';
 
-        } 
+        }
         if (setting.includes('colour')) {
             if (addedEffectsHeader == false) {
                 fileText += '[effects] \n';
@@ -152,6 +152,36 @@ function convertToINIAndServe(ini) {
     }
     download('config.ini', fileText);
     console.log(fileText);
+}
+
+function parseINIString(data) {
+    var regex = {
+        section: /^\s*\[\s*([^\]]*)\s*\]\s*$/,
+        param: /^\s*([^=]+?)\s*=\s*(.*?)\s*$/,
+        comment: /^\s*;.*$/
+    };
+    var value = {};
+    var lines = data.split(/[\r\n]+/);
+    var section = null;
+    lines.forEach(function (line) {
+        if (regex.comment.test(line)) {
+            return;
+        } else if (regex.param.test(line)) {
+            var match = line.match(regex.param);
+            if (section) {
+                value[section][match[1]] = match[2];
+            } else {
+                value[match[1]] = match[2];
+            }
+        } else if (regex.section.test(line)) {
+            var match = line.match(regex.section);
+            value[match[1]] = {};
+            section = match[1];
+        } else if (line.length == 0 && section) {
+            section = null;
+        };
+    });
+    return value;
 }
 
 function download(filename, text) {
