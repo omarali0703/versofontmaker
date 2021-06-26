@@ -287,7 +287,9 @@ function processFile(data) {
 }
 
 function readFileAndLoadSettings(data) {
-    
+    let iniFileData = parseINIString(data);
+
+    console.log(iniFileData);
 }
 
 function initialisePage() {
