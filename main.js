@@ -296,17 +296,54 @@ function readFileAndLoadSettings(data) {
 function initialisePage(iniFileData = null) {
     document.querySelector('.main-container').innerHTML = '';
 
+    if (validateIniFile(iniFileData)) {
+        for (let index of iniFileData) {
+            switch (index) {
+                case "effects":
+                    break;
+                case "settings":
+                    break;
+            }
+
+            if ('font' in index) {
+                let fontIndex = index.split('font')[1];
+                let deletable = true;
+                if (fontIndex == 1) {
+                    deletable = true;
+                }
+                createSetting('Font', fontSettings, 'font', false, deletable);
+            }
+
+            if ('profile' in index) {
+                let profileIndex = index.split('profile')[1];
+                let deletable = true;
+                if (profileIndex == 1) {
+                    deletable = true;
+                }
+                createSetting('Font', profileSettings, 'font', false, deletable);
+                
+            }
+        }
+        return;
+    }
+    loadDefaults();
+    doNoShowAgainPresets = false;
+}
+
+function validateIniFile(iniFileData) {
+    if (iniFileData == null) {
+        return false;
+    }
+
+    return true;
+}
+
+function loadDefaults() {
     createSetting("Main Saber Settings", baseSettings, 'base', false);
     createSetting("Effects Settings", effectSettings, 'effects', false);
     createSetting("Font", fontSettings, 'font');
-    // insertAdd('fonts');
-    // insertAdd('effects');
     createSetting("Colour", colourSettings, 'colour', false);
-    // insertAdd('colour');
     createSetting("Profile", profileSettings, 'profile', false);
-    // insertAdd('profile');
-
-    doNoShowAgainPresets = false;
 }
 
 /*function insertAdd(type)
